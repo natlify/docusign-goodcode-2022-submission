@@ -4,7 +4,6 @@ import { loginRequired } from "../../common/middlewares.js";
 const router = express.Router();
 
 router.get("/survey123/camera/:cameraId", loginRequired, async (req, res) => {
-  console.log("Hit s");
   try {
     const response = await arcgis.fetchByCameraId(req);
     return res.status(200).json(response);

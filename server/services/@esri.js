@@ -14,20 +14,19 @@ ApiKeyManager.fromKey(apiKey);
 const SessionAuth = ApplicationCredentialsManager.fromCredentials({
   clientId: "jyqJyNUDwTmdReYd",
   clientSecret: "0f1778872fbb465f89dce96a04c4d132",
-  expiration: 20160,
+  expiration: 10,
 });
-SessionAuth.getToken("https://www.arcgis.com/sharing/rest/oauth2/token");
+
+// await SessionAuth.getToken(
+//   "https://www.arcgis.com/sharing/rest/oauth2/token",
+// );
 
 export const querySurvey123ByCamera = async (camId) => {
-  try {
-    const data = await queryFeatures({
-      url: "https://services.arcgis.com/ZjVc77HgpHbYSSCI/arcgis/rest/services/survey123_2649229083e74020ac0cba6d55ad9c59_stakeholder/FeatureServer/0",
-      where: `camera_id = '${camId}'`,
-      resultRecordCount: 1,
-      authentication: SessionAuth,
-    });
-    return data.features[0];
-  } catch (error) {
-    console.log(error.message);
-  }
+  const data = await queryFeatures({
+    url: "https://services.arcgis.com/ZjVc77HgpHbYSSCI/arcgis/rest/services/survey123_2649229083e74020ac0cba6d55ad9c59_stakeholder/FeatureServer/0",
+    where: `camera_id = '${camId}'`,
+    resultRecordCount: 1,
+    authentication: SessionAuth,
+  });
+  return data.features[0];
 };
