@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { userRouter } from "./routes/user.js";
 import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
+import { arcGISRouter } from "./routes/arcgis.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import cors from "cors";
@@ -36,6 +37,7 @@ app.get("/api", (req, res) => {
 app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
 app.use("/api/label", labelRouter);
+app.use("/api/arcgis", arcGISRouter);
 
 // All other GET requests not handled before will return our React app
 app.get("*", (req, res) => {
