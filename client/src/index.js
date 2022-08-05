@@ -7,11 +7,12 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
+import "./styles.css";
 import AddTaskModal from "./components/modals/addTaskModal/AddTaskModal";
 import { UserProvider } from "./UserContext";
 import { modalProps } from "./utils/modalProps";
 import { theme } from "./utils/theme";
-import App from "./App";
+import App from "./ArjApp";
 
 const queryClient = new QueryClient();
 
