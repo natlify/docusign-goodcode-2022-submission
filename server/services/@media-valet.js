@@ -1,5 +1,6 @@
 import { ResourceOwnerPassword } from "simple-oauth2";
 import { supabase } from "./@supabase.js";
+import axios from "axios";
 
 const config = {
   client: {
@@ -12,6 +13,18 @@ const config = {
   },
 };
 export const mediaValetOauthClient = new ResourceOwnerPassword(config);
+const BASE_URL = "https://api.mediavalet.com";
+// const BOYS_FOLDER_ID = "5f202f3b-3d54-436b-a05e-1597b0127f72";
+const SUBSCRIPTION_KEY = "03e0a3d8270a432d9ede6e2cfca073dd";
+
+const restApiInstance = axios.create({
+  baseURL: BASE_URL,
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": SUBSCRIPTION_KEY,
+  },
+});
 
 export const generateAccessToken = async () => {
   const tokenParams = {
@@ -40,3 +53,11 @@ export const generateAccessToken = async () => {
     throw new Error("Access Token Error", error.message);
   }
 };
+
+export const fetchCategory = ({ token, folderID }) =>
+  restApiInstance({
+    url: `${BASE_URL}/folders/${folderID}`,
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  });
