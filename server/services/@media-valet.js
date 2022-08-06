@@ -56,7 +56,15 @@ export const generateAccessToken = async () => {
 
 export const fetchCategory = ({ token, folderID }) =>
   restApiInstance({
-    url: `${BASE_URL}/folders/${folderID}`,
+    url: `/folders/${folderID}`,
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  });
+
+export const fetchAllImagesFromCategory = ({ token, folderID }) =>
+  restApiInstance({
+    url: `/categories/${folderID}/assets?includeSoftDeleted=true`,
     headers: {
       Authorization: `bearer ${token}`,
     },

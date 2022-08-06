@@ -78,7 +78,6 @@ export const gainMediaValetAccessToken = async (req, res, next) => {
       accessToken = accessToken.token.access_token;
     }
   }
-
   req.body["bearer_token"] = accessToken;
   next();
 };

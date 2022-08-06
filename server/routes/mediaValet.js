@@ -20,4 +20,18 @@ router.get(
   },
 );
 
+
+router.get(
+  "/folder/:folderId/assets",
+  loginRequired,
+  gainMediaValetAccessToken,
+  async (req, res) => {
+    try {
+      const response = await mediaValet.fetchAllImages(req);
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(400).json({ error: error.message });
+    }
+  },
+);
 export { router as mediaValetRouter };
