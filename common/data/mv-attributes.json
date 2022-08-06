@@ -1,0 +1,911 @@
+{
+  "apiVersion": "2022.6.17.1",
+  "warnings": [],
+  "errors": [],
+  "payload": [
+    {
+      "id": "33ebb5dd-643a-457e-9852-5090b54be9f5",
+      "attributeType": "String",
+      "name": "Alt Text",
+      "searchFieldName": null,
+      "tagName": "alt text",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "AltText",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "2613bea5-850f-40c6-bcce-db545525f1bf",
+      "attributeType": "String",
+      "name": "Approved Date",
+      "searchFieldName": null,
+      "tagName": "approved date",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "ApprovedDate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "f5d2e034-0ecc-4636-96f1-bb39b0145195",
+      "attributeType": "String",
+      "name": "Aspect Ratio",
+      "searchFieldName": null,
+      "tagName": "aspect ratio",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "AspectRatio",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "a60456ef-8951-4949-90ae-22b9e95b747b",
+      "attributeType": "String",
+      "name": "Bit Rate",
+      "searchFieldName": null,
+      "tagName": "bit rate",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "BitRate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "4b1fb705-4fb9-481b-a4f7-5b7081a8b7fe",
+      "attributeType": "String",
+      "name": "Color Mode",
+      "searchFieldName": null,
+      "tagName": "color mode",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "ColorMode",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "82e87895-45f3-4239-b9fa-8c33e3a812d8",
+      "attributeType": "String",
+      "name": "Description",
+      "searchFieldName": null,
+      "tagName": "description",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Description",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "b6b88766-9245-4f71-bef5-9f690ee5f02d",
+      "attributeType": "String",
+      "name": "Dimensions",
+      "searchFieldName": null,
+      "tagName": "dimensions",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "Image Height",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Dimensions",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "7a4677d1-ea80-4e16-931c-225640bd5f34",
+      "attributeType": "String",
+      "name": "Disapproved Date",
+      "searchFieldName": null,
+      "tagName": "disapproved date",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "DisapprovedDate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "29e1bb3d-baf2-4de6-b0ce-2b8548ded331",
+      "attributeType": "DateTime",
+      "name": "Expiry Date",
+      "searchFieldName": null,
+      "tagName": "expiry date",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "DateTime",
+        "name": "ExpiryDate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "b9b83ba5-7a70-4900-a89a-3d80b3639f50",
+      "attributeType": "String",
+      "name": "File Name",
+      "searchFieldName": null,
+      "tagName": "file name",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "File Name",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "FileName",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "f50da800-1fa5-4cb9-b337-6fa3a960431d",
+      "attributeType": "Integer",
+      "name": "File Size",
+      "searchFieldName": null,
+      "tagName": "file size",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "File Size",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Integer",
+        "name": "FileSize",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "3fbc5038-a878-4e10-992c-fccc46d430b8",
+      "attributeType": "Integer",
+      "name": "File Type",
+      "searchFieldName": null,
+      "tagName": "file type",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "File Type",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Integer",
+        "name": "FileType",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "3c7ece2c-521b-4ee9-8464-40691d71386a",
+      "attributeType": "String",
+      "name": "Frame Rate",
+      "searchFieldName": null,
+      "tagName": "frame rate",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "FrameRate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "04ab384d-9668-4e27-8221-74a46618ad2f",
+      "attributeType": "Integer",
+      "name": "Image Height",
+      "searchFieldName": null,
+      "tagName": "image height",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "Image Height",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Integer",
+        "name": "ImageHeight",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "063ec16c-fec5-40a8-93f8-72cda2f2170b",
+      "attributeType": "Integer",
+      "name": "Image Width",
+      "searchFieldName": null,
+      "tagName": "image width",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "Image Width",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Integer",
+        "name": "ImageWidth",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "00c93bf7-7084-463d-921a-9d64aecff8c8",
+      "attributeType": "String",
+      "name": "Keywords",
+      "searchFieldName": null,
+      "tagName": "keywords",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "Iptc",
+      "embeddedDataValue": "Keywords",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Keywords",
+        "embeddedDataType": "Iptc",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "31c13440-604e-42bb-96eb-12faefad537f",
+      "attributeType": "String",
+      "name": "Length",
+      "searchFieldName": null,
+      "tagName": "length",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Length",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "63970d4e-6b53-4d31-a9a2-2ad651a560d7",
+      "attributeType": "String",
+      "name": "Mime Type",
+      "searchFieldName": null,
+      "tagName": "mime type",
+      "displayAttribute": true,
+      "mapEmbeddedData": true,
+      "embeddedDataType": "File",
+      "embeddedDataValue": "MIME Type",
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "MimeType",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "bceeeb62-6441-4136-b410-ac6a11812123",
+      "attributeType": "String",
+      "name": "Modified Date",
+      "searchFieldName": null,
+      "tagName": "modified date",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "ModifiedDate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "6b5847d4-038a-4900-a0b2-e54b452fd3ac",
+      "attributeType": "String",
+      "name": "Orientation",
+      "searchFieldName": null,
+      "tagName": "orientation",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Orientation",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "a0b99512-bd28-4da6-9b0c-9c07b7bb7d16",
+      "attributeType": "String",
+      "name": "Resolution",
+      "searchFieldName": null,
+      "tagName": "resolution",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Resolution",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "0c231a49-abd0-4055-96f2-ce083b9473f5",
+      "attributeType": "String",
+      "name": "Title",
+      "searchFieldName": null,
+      "tagName": "title",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "Title",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "4e263a2b-cf8e-4dd2-a1d4-75ce66530312",
+      "attributeType": "String",
+      "name": "Uploaded Date",
+      "searchFieldName": null,
+      "tagName": "uploaded date",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": true,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": null,
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "String",
+        "name": "UploadedDate",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "c0c67677-b8eb-4522-844b-a4aeb9be7807",
+      "attributeType": "Decimal",
+      "name": "X",
+      "searchFieldName": null,
+      "tagName": "x",
+      "displayAttribute": true,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": false,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": "",
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Decimal",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    },
+    {
+      "id": "6ce37da1-e78f-426a-9505-671fe9161272",
+      "attributeType": "Decimal",
+      "name": "Y",
+      "searchFieldName": null,
+      "tagName": "y",
+      "displayAttribute": false,
+      "mapEmbeddedData": false,
+      "embeddedDataType": "File",
+      "embeddedDataValue": null,
+      "mappingDirection": "Upload",
+      "delimeter": null,
+      "isSystemProperty": false,
+      "showLabel": true,
+      "isRequired": false,
+      "defaultExpression": "",
+      "parentAttributeId": null,
+      "childrenAttributeIds": null,
+      "_links": {
+        "self": "attribute",
+        "functions": [
+          "attributes",
+          "attributedatatype",
+          "embeddeddatatype",
+          "embeddeddatavalue"
+        ]
+      },
+      "translationKeys": {
+        "attributeType": "Decimal",
+        "embeddedDataType": "File",
+        "mappingDirection": "Upload",
+        "namespace": "Attribute"
+      },
+      "interpolations": {}
+    }
+  ],
+  "meta": {
+    "metaInformation": {
+      "ElapsedTimeInMS": 28
+    },
+    "createdAt": "2022-08-06T01:12:46.1512639Z"
+  }
+}
