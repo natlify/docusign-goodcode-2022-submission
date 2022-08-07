@@ -4,27 +4,24 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import HeaderMiddle from './HeadNav';
-import { NavbarMinimal } from './Navbar';
+import SideNavbar from './SideNav';
 import SideBar from './SideBar';
 
-export default function AppShellDemo({children}) {
+export default function AppLayout({children}) {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
     <AppShell
       styles={{
         main: {
-          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
+          background:theme.colors.gray[0],
         },
       }}
       navbarOffsetBreakpoint="sm"
       asideOffsetBreakpoint="sm"
-      navbar={
-        <NavbarMinimal p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
-        </NavbarMinimal>
-      }
+      navbar={<SideNavbar p="md" hiddenBreakpoint="sm" hidden={!opened} setOpened={setOpened} width={{ sm: 200, lg: 300 }}/>}
       aside={<SideBar/>}
-      header={<HeaderMiddle links={[{link: 'foo', label : 'bar'}]}/>}
+      header={<HeaderMiddle links={[{link: 'foo', label : 'bar'}]} opened={opened} setOpened={setOpened}/>}
     >
       {children}
     </AppShell>

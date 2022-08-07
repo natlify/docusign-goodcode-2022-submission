@@ -65,7 +65,7 @@ const mockdata = [
   { icon: IconSettings, label: 'Settings' },
 ];
 
-export function NavbarMinimal() {
+export default function SideNavbarMinimal() {
   const [active, setActive] = useState(2);
 
   const links = mockdata.map((link, index) => (
