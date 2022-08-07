@@ -5,6 +5,7 @@ import { userRouter } from "./routes/user.js";
 import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
 import { arcGISRouter } from "./routes/arcgis.js";
+import { eSignRouter } from "./routes/eSignature.js";
 import { mediaValetRouter } from "./routes/mediaValet.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -52,6 +53,7 @@ app.use("/api/label", labelRouter);
 app.use("/api/arcgis", arcGISRouter);
 app.use("/api/media-valet", mediaValetRouter);
 app.use("/api/docusign/auth", docuSignAuthRouter);
+app.use("/api/camera-trap", eSignRouter);
 
 if (process.env.NODE_ENV === "production") {
   // eslint-disable-next-line no-console
