@@ -1,5 +1,34 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+
+
+# local env files
+.env*
+.local
+
+server/.env
+client/.env
+!.env.example
+
+# Supabase
+**/supabase/.branches
+**/supabase/.temp
+.DS_Store
+
 ## CLIENT
 
 # dependencies
@@ -23,10 +52,5 @@ client/.env.production.local
 client/npm-debug.log*
 client/yarn-debug.log*
 client/yarn-error.log*
+client/.pnpm-debug.log*
 
-## SERVER
-
-node_modules
-server/.env
-client/.env
-.env
