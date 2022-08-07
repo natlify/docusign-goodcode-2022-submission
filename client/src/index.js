@@ -17,7 +17,7 @@ import App from "./ArjApp";
 const queryClient = new QueryClient();
 
 ReactDOM.render(
-  <MantineProvider withNormalizeCSS withGlobalStyles theme={theme}>
+  <MantineProvider withGlobalStyles withNormalizeCS theme={theme}>
     <NotificationsProvider position="top-center" limit={3}>
       <QueryClientProvider client={queryClient}>
         <UserProvider>
@@ -30,7 +30,7 @@ ReactDOM.render(
             </BrowserRouter>
           </ModalsProvider>
         </UserProvider>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
       </QueryClientProvider>
     </NotificationsProvider>
   </MantineProvider>,

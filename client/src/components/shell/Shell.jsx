@@ -1,48 +1,32 @@
-import React, { useState } from "react";
-import { AppShell, Box, useMantineTheme } from "@mantine/core";
-import { Route, Routes } from "react-router-dom";
-import { useShellStyles } from "../../hooks/styles/use-shell-styles";
-import Dashboard from "../dashboard/Dashboard";
-import CalendarPage from "../calendar/CalendarPage";
-import Header from "./header/Header";
-import Navbar from "./navbar/Navbar.jsx";
+import React,{ useState } from 'react';
+import {
+  AppShell,
+  useMantineTheme,
+} from '@mantine/core';
+import HeaderMiddle from './headNav/HeadNav';
+import { NavbarMinimal } from './navbar/Navbar';
+import SideBar from '../SideBar';
 
-const Shell = () => {
-  const [opened, setOpened] = useState(false);
-  const { classes } = useShellStyles();
+export default function AppShellDemo({children}) {
   const theme = useMantineTheme();
-
+  const [opened, setOpened] = useState(false);
   return (
     <AppShell
-      fixed
-      className={opened ? classes.smallShell : classes.shell}
       styles={{
         main: {
-          paddingLeft: 390,
-          paddingRight: 70,
-          paddingBottom: 0,
-
-          [theme.fn.smallerThan("lg")]: {
-            paddingLeft: 370,
-            paddingRight: 50,
-          },
-
-          [theme.fn.smallerThan("sm")]: {
-            padding: "80px 40px 0",
-          },
+          background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
         },
       }}
-      navbar={<Navbar opened={opened} setOpened={setOpened} />}
-      header={<Header opened={opened} setOpened={setOpened} />}
+      navbarOffsetBreakpoint="sm"
+      asideOffsetBreakpoint="sm"
+      navbar={
+        <NavbarMinimal p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 300 }}>
+        </NavbarMinimal>
+      }
+      aside={<SideBar/>}
+      header={<HeaderMiddle links={[{link: 'foo', label : 'bar'}]}/>}
     >
-      <Box>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/calendar" element={<CalendarPage />} />
-        </Routes>
-      </Box>
+      {children}
     </AppShell>
   );
-};
-
-export default Shell;
+}
