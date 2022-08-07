@@ -7,11 +7,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 
-import "./styles.css";
-import AddTaskModal from "./components/modals/addTaskModal/AddTaskModal";
-import { UserProvider } from "./UserContext";
+import "./styles/main.css";
 import { modalProps } from "./utils/modalProps";
-import { theme } from "./utils/theme";
+import { theme } from "./styles/theme";
 import App from "./ArjApp";
 
 const queryClient = new QueryClient();
@@ -20,16 +18,11 @@ ReactDOM.render(
   <MantineProvider withGlobalStyles withNormalizeCS theme={theme}>
     <NotificationsProvider position="top-center" limit={3}>
       <QueryClientProvider client={queryClient}>
-        <UserProvider>
-          <ModalsProvider
-            modals={{ addTaskModal: AddTaskModal }}
-            modalProps={modalProps}
-          >
-            <BrowserRouter>
-              <App />
-            </BrowserRouter>
-          </ModalsProvider>
-        </UserProvider>
+        <ModalsProvider modals={{}} modalProps={modalProps}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalsProvider>
         {/* <ReactQueryDevtools initialIsOpen={false} position="bottom-right" /> */}
       </QueryClientProvider>
     </NotificationsProvider>

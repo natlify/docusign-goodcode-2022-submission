@@ -3,9 +3,9 @@ import {
   AppShell,
   useMantineTheme,
 } from '@mantine/core';
-import HeaderMiddle from './headNav/HeadNav';
-import { NavbarMinimal } from './navbar/Navbar';
-import SideBar from '../SideBar';
+import HeaderMiddle from './HeadNav';
+import { NavbarMinimal } from './Navbar';
+import SideBar from './SideBar';
 
 export default function AppShellDemo({children}) {
   const theme = useMantineTheme();

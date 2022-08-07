@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createStyles, Header, Group, ActionIcon, Container, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons';
-import Logo from '../../Logo';
+import Logo from '../../components/icons/Logo';
 
 const useStyles = createStyles((theme) => ({
   inner: {
