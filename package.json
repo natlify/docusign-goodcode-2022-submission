@@ -40,7 +40,6 @@
     "image-to-base64": "^2.2.0",
     "open": "^8.4.0",
     "pg": "^8.7.3",
-    "react-icons": "^4.3.1",
     "simple-oauth2": "^4.3.0"
   },
   "devDependencies": {

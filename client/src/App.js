@@ -5,7 +5,7 @@ import ImageGallery from "./pages/ImageGallery";
 
 // import MyMap from "./components/MyMap";
 
-function ArjApp() {
+function App() {
   return (
     <AppShellDemo>
       <ImageGallery />
@@ -13,4 +13,4 @@ function ArjApp() {
   );
 }
 
-export default ArjApp;
+export default App;

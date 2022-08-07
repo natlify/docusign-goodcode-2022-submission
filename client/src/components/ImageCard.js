@@ -107,36 +107,11 @@ export default function ImageCard() {
       </Card.Section>
 
       <Card.Section className={classes.section}>
-        <Group spacing={30}>
-          <div>
-            <Text size="xl" weight={700} sx={{ lineHeight: 1 }}>
-              $168.00
-            </Text>
-            <Text
-              size="sm"
-              color="dimmed"
-              weight={500}
-              sx={{ lineHeight: 1 }}
-              mt={3}
-            >
-              per day
-            </Text>
-          </div>
-          <Button
-            radius="md"
-            variant="outline"
-            color="green"
-            style={{ flex: 1 }}
-          >
-            Handle Sensitive
+        <Group spacing={"xs"} grow>
+          <Button radius="md" variant="outline" color="green">
+            Zap Sensitive
           </Button>
-
-          <Button
-            radius="md"
-            variant="gradient"
-            color="green"
-            style={{ flex: 1 }}
-          >
+          <Button radius="md" variant="gradient" color="green">
             Zap &apos;n Verify
           </Button>
         </Group>
