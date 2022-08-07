@@ -1,4 +1,5 @@
 import eSignSdk from "docusign-esign";
+import { ROLE_NAMES } from "../utils/contants.js";
 import { getRenderedHtml } from "./docGeneration.js";
 
 const ESignBasePath = eSignSdk.ApiClient.RestApi.BasePath.DEMO;
@@ -23,6 +24,7 @@ export const createEnvelopeDraft = async (envelopeDefinition, args) => {
 
   return envelopeId;
 };
+
 /**
  *
  * @param Document document
@@ -42,20 +44,27 @@ export const addDocumentToEnvelopeDraft = async (document, args) => {
   return updateResult;
 };
 
-const generateSigning = async () => {
+export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
   let envlp = new eSignSdk.EnvelopeDefinition();
-  envlp.templateId = "e98c5414-6272-447d-9ee1-96d5b7f2764a";
-  envlp.brandId = "4aba865e-f5a5-4145-a8ba-18fc475759d6";
-  let signer1 = eSignSdk.TemplateRole.constructFromObject({
-    email: "hbthck@gmail.com",
-    name: "Arjith Natarajan",
-    roleName: "Verifier",
-  });
+  envlp.templateId = process.env.DS_SENTINELS_TEMPLATE;
+  envlp.brandId = envelopeArgs.brandId;
 
-  let optionalReviewer1 = new eSignSdk.TemplateRole();
-  optionalReviewer1.email = "ferran.9908@gmail.com";
-  optionalReviewer1.name = "Ferran Sulaiman";
-  optionalReviewer1.roleName = "Reviewer L1";
+  const { recipients, mediaValetData, survey123Data } = envelopeArgs;
+
+  let firstVerifier = new eSignSdk.TemplateRole();
+  firstVerifier.email = recipients.signerEmail;
+  firstVerifier.name = recipients.signerFullName;
+  firstVerifier.roleName = ROLE_NAMES.VERIFIER;
+
+  /** Constructing Additional Reviewers in Case Of Sensitive Data */
+  const additionalReviewers = recipients.reviewers.map(
+    ({ name, email }, index) =>
+      eSignSdk.TemplateRole.constructFromObject({
+        email,
+        name,
+        roleName: `Reviewer L${index + 1}`, // Rolenames for reviewers follow the pattern L1, L2 etc.
+      }),
+  );
 
   envlp.customFields = {
     textCustomFields: [
@@ -63,13 +72,13 @@ const generateSigning = async () => {
         name: "CameraImageId",
         show: "true",
         fieldId: "10735428877",
-        value: "CAM_122323",
+        value: mediaValetData.title,
       },
       {
         name: "Area",
         show: "true",
         fieldId: "10735428879",
-        value: "Tanzania",
+        value: survey123Data.areaDeployed,
       },
     ],
     listCustomFields: [
@@ -77,63 +86,109 @@ const generateSigning = async () => {
         name: "IsSensitive",
         show: "true",
         fieldId: "10735428878",
-        value: "Yes",
+        value: envelopeArgs.isSensitive ? "Yes" : "No",
       },
     ],
   };
 
-  envlp.templateRoles = [signer1, optionalReviewer1];
+  envlp.templateRoles = [firstVerifier, ...additionalReviewers];
   envlp.status = "created";
 
-  const accessToken =
-    "eyJ0eXAiOiJNVCIsImFsZyI6IlJTMjU2Iiwia2lkIjoiNjgxODVmZjEtNGU1MS00Y2U5LWFmMWMtNjg5ODEyMjAzMzE3In0.AQoAAAABAAUABwCA80pk63faSAgAgFsPxvN32kgCAN-fB5PDP4NMhSZ-j2X_LNQVAAEAAAAYAAEAAAAFAAAADQAkAAAAMjNlMDk5ZTYtZDM5ZS00MDk5LThiNzctZTVjZTY5NDBkZGZiIgAkAAAAMjNlMDk5ZTYtZDM5ZS00MDk5LThiNzctZTVjZTY5NDBkZGZiEgABAAAABgAAAGp3dF9iciMAJAAAADIzZTA5OWU2LWQzOWUtNDA5OS04Yjc3LWU1Y2U2OTQwZGRmYg.LUYqH5eQ760mxii_r-8rxp9_49C-G_cql6JU1RPmaG7r7aujygLF69J4xN-N_Onlj5az8cXtXHuQyATCziPIjQ4WMmVRJHLPT7_jsG3CbppOBdvFxIH7uZLPoTDMycCRMnij_oviwhsaf7xaXqRfnQcvTqxaE_67RtfM98qS1MzRr8BoHnPzspTupzzSopE16EsA1k84JdATfJ0A8QykwecbdxAZViW2kovFoZI4gOgX05xns9pZ7wKcKuyIJWMSAaT9UbG-coPgTjNCcPK7dcooeLUyyeeoXAtf8NFF-VBski5s3O74yfni7bAWMhiopgDOU2hbuTTfiSEZqYSdSw";
+  return envlp;
+};
 
-  try {
-    const draftEnvelopeId = await createEnvelopeDraft(envlp, {
-      ESignBasePath,
-      accountId: "77c8b115-51ee-4f06-9979-ca9e73968e8e",
-      accessToken,
-    });
+export const generateDocumentPopulatedWithData = async (data) => {
+  const htmlDocumentData = await getRenderedHtml(data);
+  let document = new eSignSdk.Document();
+  document.documentBase64 = Buffer.from(htmlDocumentData).toString("base64");
+  document.name = "Verification Document";
+  document.fileExtension = "html";
+  document.documentId = "2";
+  return document;
+};
 
-    let doc1 = new eSignSdk.Document(),
-      doc1b64 = Buffer.from(await getRenderedHtml()).toString("base64");
-    doc1.documentBase64 = doc1b64;
-    doc1.name = "Verification Document"; // can be different from actual file name
-    doc1.fileExtension = "html"; // Source data format. Signed docs are always pdf.
-    doc1.documentId = "2"; // a label used to reference the doc
+export const applyTemplateToDocument = async (
+  { documentId, templateId },
+  args,
+) => {
+  let eSignApi = new eSignSdk.ApiClient();
+  eSignApi.setBasePath(ESignBasePath);
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  let applyResult = await envelopesApi.applyTemplateToDocument(
+    args.accountId,
+    args.envelopeId,
+    documentId,
+    {
+      documentTemplateList: {
+        documentTemplates: [
+          {
+            templateId,
+            documentId,
+            documentStartPage: "1",
+            documentEndPage: "2",
+          },
+        ],
+      },
+    },
+  );
+  return applyResult;
+};
 
-    let eSignApi = new eSignSdk.ApiClient();
-    eSignApi.setBasePath(ESignBasePath);
-    eSignApi.addDefaultHeader("Authorization", "Bearer " + accessToken);
-    let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
-    let updateResult = await envelopesApi.updateDocuments(
-      "77c8b115-51ee-4f06-9979-ca9e73968e8e",
-      draftEnvelopeId,
-      { envelopeDefinition: { documents: [doc1] } },
-    );
-    console.log(updateResult);
-
-    await addDocumentToEnvelopeDraft(doc1);
-
-    let applyResult = await envelopesApi.applyTemplateToDocument(
-      "77c8b115-51ee-4f06-9979-ca9e73968e8e",
-      draftEnvelopeId,
-      doc1.documentId,
-      {
-        documentTemplateList: {
-          documentTemplates: [
+export const sendEnvelope = async (args) => {
+  let eSignApi = new eSignSdk.ApiClient();
+  eSignApi.setBasePath(ESignBasePath);
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  const sentResult = await envelopesApi.update(
+    args.accountId,
+    args.envelopeId,
+    {
+      envelope: {
+        status: "sent",
+        workflow: {
+          workflowSteps: [
             {
-              templateId: "e98c5414-6272-447d-9ee1-96d5b7f2764a",
-              documentId: "2",
-              documentStartPage: "1",
-              documentEndPage: "2",
+              action: "pause_before",
+              description: "pause_before routing order 2",
+              itemId: 2,
+              triggerOnItem: "routing_order",
             },
           ],
         },
       },
-    );
-    console.log(applyResult);
-  } catch (error) {
-    console.log(error);
-  }
+    },
+  );
+  return sentResult;
+};
+
+export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
+  let eSignApi = new eSignSdk.ApiClient();
+  eSignApi.setBasePath(ESignBasePath);
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+
+  // Create the recipient view request object
+  const viewRequest = new eSignSdk.RecipientViewRequest.constructFromObject({
+    authenticationMethod: "none",
+    clientUserId: args.envelopeArgs.signerClientId,
+    recipientId: "1",
+    returnUrl: args.envelopeArgs.redirectUrl,
+    userName: args.envelopeArgs.recipients.signerFullName,
+    email: args.envelopeArgs.recipients.signerEmail,
+    pingFrequency: "500",
+    pingUrl: args.envelopeArgs.healthCheckEndPoint,
+  });
+
+  // Call the CreateRecipientView API
+  // Exceptions will be caught by the calling function
+  let recipientView = await envelopesApi.createRecipientView(
+    args.accountId,
+    envelopeId,
+    {
+      recipientViewRequest: viewRequest,
+    },
+  );
+
+  return recipientView.url;
 };

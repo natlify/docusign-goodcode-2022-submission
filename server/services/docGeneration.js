@@ -2,6 +2,10 @@ import imageToBase64 from "image-to-base64";
 import ejs from "ejs";
 import util from "util";
 import fs from "fs";
+import { fileURLToPath } from "url";
+import path, { dirname } from "path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const writeFile = util.promisify(fs.writeFile);
 
@@ -10,11 +14,11 @@ export const convertToBase64 = async (url) => {
   return response;
 };
 
-export const getRenderedHtml = async (data = {}) => {
+export const getRenderedHtml = async () => {
   try {
     const htmlString = await ejs
       .renderFile(
-        "docTemplates/Sentinels-CTIMDV.ejs",
+        path.resolve(__dirname, "../docTemplates/Sentinels-CTIMDV.ejs"),
         {
           imageTitle: "CAM_52663_IMG_0214",
           fileType: "JPG",

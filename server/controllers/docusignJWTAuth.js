@@ -67,6 +67,7 @@ export const checkToken = async (req) => {
 
     // Update the token if needed
     if (needToken) {
+      console.log("refreshing");
       await getToken(req);
     }
   } catch (error) {
@@ -111,8 +112,8 @@ const getUserInfo = async (req) => {
   }
 
   // Save user information in session.
-  req.session.accountId = accountInfo.accountId;
-  req.session.basePath = accountInfo.baseUri + baseUriSuffix;
+  req.session.docuSignAccountId = accountInfo.accountId;
+  req.session.docuSignBasePath = accountInfo.baseUri + baseUriSuffix;
 };
 
 /**
