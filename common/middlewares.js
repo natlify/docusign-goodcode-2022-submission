@@ -8,7 +8,7 @@ export const loginRequired = async (req, res, next) => {
   try {
     // const userInfo = await pool.query(
     //   `SELECT user_id FROM users WHERE session=$1;`,
-    //   [req.cookies["team-lp-project-5"]],
+    //   [req.cookies["zapene-app-goodcode-2022"]],
     // );
     // if (userInfo.rowCount === 1) {
     //   req.session = {

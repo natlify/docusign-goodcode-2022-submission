@@ -25,7 +25,14 @@ const ImageGallery = () => {
     };
     getTasks();
   }, []);
-  return <SimpleGrid cols={3}>{items}</SimpleGrid>;
+  return (
+    <Container>
+      <SimpleGrid cols={3}>{items}</SimpleGrid>
+      <p>
+        <pre>{JSON.stringify(process.env, null, 4)}</pre>
+      </p>
+    </Container>
+  );
 };
 
 export default ImageGallery;

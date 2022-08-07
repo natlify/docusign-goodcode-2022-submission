@@ -1,8 +1,8 @@
 {
-  "name": "team-lp-project-5",
+  "name": "zapene-app-goodcode-2022",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "type": "module",
   "scripts": {
     "start": "node server/index.js",

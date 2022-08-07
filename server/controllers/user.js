@@ -21,14 +21,14 @@ export default class UserController {
     ]);
     const userSessionIdExist = user.rows[0].session;
     if (userSessionIdExist) {
-      res.cookie("team-lp-project-5", userSessionIdExist);
+      res.cookie("zapene-app-goodcode-2022", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
       await pool.query(`UPDATE users SET session=$1 WHERE email=$2;`, [
         sessionToken,
         req.body.email,
       ]);
-      res.cookie("team-lp-project-5", sessionToken);
+      res.cookie("zapene-app-goodcode-2022", sessionToken);
     }
     return { message: "User created", userId: user.rows[0].user_id };
   };
@@ -49,14 +49,14 @@ export default class UserController {
     }
     const userSessionIdExist = user.rows[0].session;
     if (userSessionIdExist) {
-      res.cookie("team-lp-project-5", userSessionIdExist);
+      res.cookie("zapene-app-goodcode-2022", userSessionIdExist);
     } else {
       const sessionToken = crypto.randomBytes(64).toString("base64");
       await pool.query(`UPDATE users SET session=$1 WHERE email=$2;`, [
         sessionToken,
         req.body.email,
       ]);
-      res.cookie("team-lp-project-5", sessionToken);
+      res.cookie("zapene-app-goodcode-2022", sessionToken);
     }
     return { message: "Logged in successfully.", userId: user.rows[0].user_id };
   };

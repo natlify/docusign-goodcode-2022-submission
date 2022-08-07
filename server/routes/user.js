@@ -46,7 +46,7 @@ router.get("/tasks/until/:dueDate", loginRequired, async (req, res) => {
 router.post("/logout", loginRequired, async (req, res) => {
   try {
     const response = await UserController.logout(req);
-    res.clearCookie("team-lp-project-5");
+    res.clearCookie("zapene-app-goodcode-2022");
     return res.status(200).json(response);
   } catch (error) {
     return res.status(400).json({ error: error.message });
