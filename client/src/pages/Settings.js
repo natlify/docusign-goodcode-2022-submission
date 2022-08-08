@@ -1,9 +1,25 @@
-import { Center, Container } from "@mantine/core";
-
+import { Button, Center, Container, Group, Stack, Text } from "@mantine/core";
+import { useDispatch, useSelector, useStore } from "react-redux";
 const Settings = () => {
+  const { dispatch, store } = useStore();
+  const count = useSelector((root) => root.count);
   return (
     <Container>
       <Center>Settings</Center>
+      <Stack justify={"center"} spacing="xl" align={"center"}>
+        <Group align={"center"} position="center">
+          <Text>{count}</Text>
+          <Button onClick={async () => await dispatch.count.increment(1)}>
+            Click Me
+          </Button>
+        </Group>
+        <Group align={"center"} position="center">
+          <Text>{count}</Text>
+          <Button onClick={async () => await dispatch.count.increment(1)}>
+            Click Me
+          </Button>
+        </Group>
+      </Stack>
     </Container>
   );
 };

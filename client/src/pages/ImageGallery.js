@@ -4,13 +4,10 @@ import { IconBug, IconCross } from "@tabler/icons";
 import { useState } from "react";
 import { useEffect } from "react";
 import ImageCard from "../components/ImageCard";
-import { useDispatch, useSelector, useStore } from "react-redux";
 
 const ImageGallery = () => {
   const [imageData, setImageData] = useState(new Array(10).fill(0));
   const items = imageData.map((item) => <ImageCard key={item} />);
-  const { dispatch, store } = useStore();
-  const count = useSelector((root) => root.count);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -30,12 +27,6 @@ const ImageGallery = () => {
   }, []);
   return (
     <Container>
-      <div>
-        <Text>{count}</Text>
-        <Button onClick={async () => await dispatch.count.increment(1)}>
-          Click Me
-        </Button>
-      </div>
       <SimpleGrid cols={3}>{items}</SimpleGrid>
     </Container>
   );
