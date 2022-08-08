@@ -13,6 +13,7 @@ import cors from "cors";
 import "dotenv/config";
 import { docuSignAuthRouter } from "./routes/docuSignJwt.js";
 // import helmet from "helmet";
+import morgan from "morgan";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,7 +21,13 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+morgan.token(
+  "zapene-custom-format",
+  ":status [:method] <== :http-version :url | :response-time ms",
+);
 // app.use(helmet());
+app.use(morgan("zapene-custom-format"));
 app.use(express.json());
 app.use(cookieParser());
 app.use(
