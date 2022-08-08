@@ -19,7 +19,7 @@ const root = createRoot(container);
 root.render(
   <Provider store={store}>
     <MantineProvider withGlobalStyles withNormalizeCS theme={theme}>
-      <NotificationsProvider position="top-center" limit={3}>
+      <NotificationsProvider position="bottom-right" limit={4}>
         <ModalsProvider modals={{}} modalProps={modalProps}>
           <BrowserRouter>
             <HelmetProvider>
