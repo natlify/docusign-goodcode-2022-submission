@@ -11,6 +11,7 @@ import "./styles/main.css";
 import { modalProps } from "./utils/modalProps";
 import { theme } from "./styles/theme";
 import App from "./App";
+import Root from "./routes/Root";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -22,7 +23,7 @@ root.render(
         <ModalsProvider modals={{}} modalProps={modalProps}>
           <BrowserRouter>
             <HelmetProvider>
-              <App />
+              <Root />
             </HelmetProvider>
           </BrowserRouter>
         </ModalsProvider>

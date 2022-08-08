@@ -4,7 +4,7 @@ import GitHub from "../components/icons/GitHub";
 import Navbar from "../layouts/LandingPageLayout/Navbar";
 import { Helmet } from "react-helmet-async";
 
-export default function LandingPage() {
+const LandingPage = () => {
   return (
     <>
       <Helmet>
@@ -150,4 +150,7 @@ export default function LandingPage() {
       </div>
     </>
   );
-}
+};
+
+
+export default LandingPage;

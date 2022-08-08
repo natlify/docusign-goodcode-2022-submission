@@ -6,6 +6,7 @@ import {
 import HeaderMiddle from './HeadNav';
 import SideNavbar from './SideNav';
 import SideBar from './SideBar';
+import { Outlet } from 'react-router-dom';
 
 export default function AppLayout({children}) {
   const theme = useMantineTheme();
@@ -23,7 +24,7 @@ export default function AppLayout({children}) {
       aside={<SideBar/>}
       header={<HeaderMiddle links={[{link: 'foo', label : 'bar'}]} opened={opened} setOpened={setOpened}/>}
     >
-      {children}
+      <Outlet/>
     </AppShell>
   );
 }
