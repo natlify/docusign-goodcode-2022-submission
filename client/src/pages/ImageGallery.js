@@ -9,8 +9,8 @@ import Loading from "../components/Loading";
 const ImageGallery = () => {
   const imageData = useSelector((root) => root.ctImages.list);
   const isLoading = useSelector((root) => root.loading.models.ctImages);
-  const items = imageData.map((item) => (
-    <ImageCard key={item.id} data={item} />
+  const items = imageData.map((item, index) => (
+    <ImageCard key={item.id} data={item} index={index} />
   ));
   const dispatch = useDispatch();
 
@@ -38,7 +38,9 @@ const ImageGallery = () => {
   }
   return (
     <Container>
-      <SimpleGrid cols={3}>{items}</SimpleGrid>
+      <SimpleGrid spacing={50} cols={3}>
+        {items}
+      </SimpleGrid>
     </Container>
   );
 };
