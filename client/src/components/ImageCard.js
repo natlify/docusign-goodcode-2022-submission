@@ -10,9 +10,11 @@ import {
 } from "@mantine/core";
 import {
   IconAward,
+  IconDiscountCheck,
   IconFlame,
   IconGasStation,
   IconGauge,
+  IconLiveView,
   IconManualGearbox,
   IconUsers,
 } from "@tabler/icons";
@@ -24,7 +26,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   imageSection: {
-    padding: theme.spacing.md,
+    padding: theme.spacing.sm,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -65,7 +67,43 @@ const mockdata = [
   { label: "Electric", icon: IconGasStation },
 ];
 
-export default function ImageCard() {
+const StatusBadge = ({ status }) => {
+  switch (status) {
+    case "NONE":
+      return (
+        <Badge color="pink" variant="light">
+          <Group position="center" spacing={"xs"}>
+            <IconFlame size={12} stroke={3} />
+            <Text ml={-5}>New</Text>
+          </Group>
+        </Badge>
+      );
+
+    case "IN_REVIEW":
+      return (
+        <Badge color="yellow" variant="light">
+          <Group position="center" spacing={"xs"}>
+            <IconLiveView size={12} stroke={3} />
+            <Text ml={-5}>In Progress</Text>
+          </Group>
+        </Badge>
+      );
+
+    case "VERIFIED":
+      return (
+        <Badge color="green" variant="light">
+          <Group position="center" spacing={"xs"}>
+            <IconDiscountCheck size={12} stroke={3} />
+            <Text ml={-5}>Approved</Text>
+          </Group>
+        </Badge>
+      );
+    default:
+      break;
+  }
+};
+
+export default function ImageCard({ data }) {
   const { classes } = useStyles();
   const features = mockdata.map((feature) => (
     <Center key={feature.label}>
@@ -74,25 +112,22 @@ export default function ImageCard() {
     </Center>
   ));
 
+  const { media, verificationStatus, title } = data;
+
   return (
     <Card withBorder radius="md" className={classes.card}>
       <Card.Section className={classes.imageSection}>
-        <Image src="https://i.imgur.com/ZL52Q2D.png" alt="Tesla Model S" />
+        <Image src={media.large} alt="Tesla Model S" />
       </Card.Section>
 
       <Group position="apart" mt="md">
         <div>
-          <Text weight={500}>Tesla Model S</Text>
+          <Text weight={500}>{title}</Text>
           <Text size="xs" color="dimmed">
             Free recharge at any station
           </Text>
         </div>
-        <Badge color="pink" variant="light">
-          <Group position="center" spacing={"xs"}>
-            <IconFlame size={12} stroke={3} />
-            <Text ml={-5}>New</Text>
-          </Group>
-        </Badge>
+        <StatusBadge status={verificationStatus} />
       </Group>
 
       <Card.Section className={classes.section} mt="md">

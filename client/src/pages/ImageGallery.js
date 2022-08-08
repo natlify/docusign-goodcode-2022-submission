@@ -1,19 +1,27 @@
 import { Button, Container, Group, SimpleGrid, Text } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconBug, IconCross } from "@tabler/icons";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import ImageCard from "../components/ImageCard";
+import { useDispatch, useSelector, useStore } from "react-redux";
+import Loading from "../components/Loading";
 
 const ImageGallery = () => {
-  const [imageData, setImageData] = useState(new Array(10).fill(0));
-  const items = imageData.map((item) => <ImageCard key={item} />);
+  const imageData = useSelector((root) => root.ctImages.list);
+  const isLoading = useSelector((root) => root.loading.models.ctImages);
+  const items = imageData.map((item) => (
+    <ImageCard key={item.id} data={item} />
+  ));
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getTasks = async () => {
       try {
         // setTasks(data);
-        throw new Error("Sample Error Message");
+        await dispatch.ctImages.fetchDataFromSources({
+          folderId: "7d256341-06e2-4f2b-8d29-0d4ffc1856f5",
+        });
+        // throw new Error("Sample Error Message");
       } catch (error) {
         showNotification({
           title: "Something went wrong!",
@@ -25,6 +33,9 @@ const ImageGallery = () => {
     };
     getTasks();
   }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <Container>
       <SimpleGrid cols={3}>{items}</SimpleGrid>
