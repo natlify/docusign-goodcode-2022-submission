@@ -1,4 +1,4 @@
-import { Container, SimpleGrid, Text } from "@mantine/core";
+import { Container, Group, SimpleGrid, Text } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconBug, IconCross } from "@tabler/icons";
 import React, { useState } from "react";
@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import ImageCard from "../components/ImageCard";
 
 const ImageGallery = () => {
-  const [imageData, setImageData] = useState([1]);
+  const [imageData, setImageData] = useState(new Array(10).fill(0));
   const items = imageData.map((item) => <ImageCard key={item} />);
 
   useEffect(() => {
@@ -28,9 +28,6 @@ const ImageGallery = () => {
   return (
     <Container>
       <SimpleGrid cols={3}>{items}</SimpleGrid>
-      <p>
-        <pre>{JSON.stringify(process.env, null, 4)}</pre>
-      </p>
     </Container>
   );
 };

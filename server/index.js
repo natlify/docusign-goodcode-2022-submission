@@ -1,7 +1,6 @@
 import path from "path";
 import express from "express";
 import cookieParser from "cookie-parser";
-import { userRouter } from "./routes/user.js";
 import { taskRouter } from "./routes/task.js";
 import { labelRouter } from "./routes/label.js";
 import { arcGISRouter } from "./routes/arcgis.js";
@@ -47,7 +46,6 @@ app.get("/api", (req, res) => {
 });
 
 // Routers
-app.use("/api/user", userRouter);
 app.use("/api/task", taskRouter);
 app.use("/api/label", labelRouter);
 app.use("/api/arcgis", arcGISRouter);
@@ -59,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
   // eslint-disable-next-line no-console
   console.log("In production");
   app.use(express.static(path.resolve(__dirname, "../client/build")));
-  app.use("/assets", express.static(path.join(__dirname, "assets", "public")));
+  app.use("/assets", express.static(path.join(__dirname, "assets")));
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
   });

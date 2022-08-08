@@ -5,11 +5,13 @@ import { ModalsProvider } from "@mantine/modals";
 import { NotificationsProvider } from "@mantine/notifications";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import "./styles/main.css";
 import { modalProps } from "./utils/modalProps";
 import { theme } from "./styles/theme";
 import App from "./App";
+import LandingPage from "./pages/LandingPage";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +21,9 @@ ReactDOM.render(
       <QueryClientProvider client={queryClient}>
         <ModalsProvider modals={{}} modalProps={modalProps}>
           <BrowserRouter>
-            <App />
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
           </BrowserRouter>
         </ModalsProvider>
       </QueryClientProvider>
