@@ -1,5 +1,3 @@
-import { Text } from "@mantine/core";
-import React from "react";
 import AppShellDemo from "./layouts/AppLayout/Shell";
 import ImageGallery from "./pages/ImageGallery";
 

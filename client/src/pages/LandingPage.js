@@ -1,5 +1,4 @@
 import { IconArrowNarrowRight } from "@tabler/icons";
-import React from "react";
 import { Link } from "react-router-dom";
 import GitHub from "../components/icons/GitHub";
 import Navbar from "../layouts/LandingPageLayout/Navbar";

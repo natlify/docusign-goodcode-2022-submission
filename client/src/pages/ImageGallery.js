@@ -1,7 +1,7 @@
 import { Container, Group, SimpleGrid, Text } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconBug, IconCross } from "@tabler/icons";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import ImageCard from "../components/ImageCard";
 

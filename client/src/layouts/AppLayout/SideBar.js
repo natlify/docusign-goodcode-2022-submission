@@ -1,4 +1,3 @@
-import React from "react";
 import { Aside, Container, Footer, MediaQuery, Text } from "@mantine/core";
 
 const SideBar = () => {
