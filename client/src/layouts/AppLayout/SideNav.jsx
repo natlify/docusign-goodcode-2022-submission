@@ -13,6 +13,7 @@ import {
   IconSwitchHorizontal,
 } from '@tabler/icons';
 import { MantineLogo } from '@mantine/ds';
+import { NavLink } from "react-router-dom";
 
 const useStyles = createStyles((theme) => ({
   link: {
@@ -44,36 +45,41 @@ const useStyles = createStyles((theme) => ({
 //   onClick?(): void;
 // }
 
-function NavbarLink({ icon: Icon, label, active, onClick }) {
+function NavbarLink({ icon: Icon, label,to , end = false}) {
   const { classes, cx } = useStyles();
   return (
     <Tooltip label={label} position="right" transitionDuration={0}>
-      <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
+      <NavLink
+            to={to}
+              className={({ isActive }) =>
+              cx(classes.link, { [classes.active]: isActive })
+            }
+            end>
+      <UnstyledButton>
         <Icon stroke={1.5} />
       </UnstyledButton>
+       </NavLink>
     </Tooltip>
   );
 }
 
 const mockdata = [
-  { icon: IconHome2, label: 'Home' },
-  { icon: IconGauge, label: 'Dashboard' },
-  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' },
-  { icon: IconCalendarStats, label: 'Releases' },
-  { icon: IconUser, label: 'Account' },
-  { icon: IconFingerprint, label: 'Security' },
-  { icon: IconSettings, label: 'Settings' },
+  { icon: IconHome2, label: 'Home', to: '/app' , end : true},
+  { icon: IconGauge, label: 'Dashboard', to :'dashboard'},
+  { icon: IconDeviceDesktopAnalytics, label: 'Analytics' , to: 'analytics'},
+  { icon: IconCalendarStats, label: 'Schedules' , to: 'schedules'},
+  { icon: IconUser, label: 'Contacts', to: 'contacts'},
+  { icon: IconFingerprint, label: 'Identity Access Management', to: 'admin-iam' },
+  { icon: IconSettings, label: 'Settings', to: 'settings' },
 ];
 
 export default function SideNavbarMinimal() {
-  const [active, setActive] = useState(2);
+  
 
   const links = mockdata.map((link, index) => (
     <NavbarLink
       {...link}
-      key={link.label}
-      active={index === active}
-      onClick={() => setActive(index)}
+      key={link.label+ index}
     />
   ));
 
@@ -89,8 +95,8 @@ export default function SideNavbarMinimal() {
       </Navbar.Section>
       <Navbar.Section>
         <Stack justify="center" spacing={0}>
-          <NavbarLink icon={IconSwitchHorizontal} label="Change account" />
-          <NavbarLink icon={IconLogout} label="Logout" />
+          <NavbarLink icon={IconSwitchHorizontal} label="Change account" to="app/switch-accounts"/>
+          <NavbarLink icon={IconLogout} label="Logout" to="auth/logout" />
         </Stack>
       </Navbar.Section>
     </Navbar>
