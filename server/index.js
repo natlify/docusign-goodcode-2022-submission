@@ -12,7 +12,7 @@ import session from "express-session";
 import cors from "cors";
 import "dotenv/config";
 import { docuSignAuthRouter } from "./routes/docuSignJwt.js";
-import helmet from "helmet";
+// import helmet from "helmet";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,7 +20,7 @@ const __dirname = dirname(__filename);
 const PORT = process.env.PORT || 3001;
 
 const app = express();
-app.use(helmet());
+// app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
 app.use(
