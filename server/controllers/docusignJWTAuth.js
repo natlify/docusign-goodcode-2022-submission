@@ -168,9 +168,5 @@ export const isLoggedIn = (req, res) => {
     isLoggedIn = req.session.isDocuSignLoggedIn;
   }
 
-  if (isLoggedIn) {
-    res.status(200).send(req.session.docuSignAccessToken);
-  }
-
   res.status(200).send(isLoggedIn);
 };
