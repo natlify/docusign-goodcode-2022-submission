@@ -14,6 +14,7 @@
     "@mantine/modals": "^5.0.3",
     "@mantine/notifications": "^5.0.3",
     "@rematch/core": "^2.2.0",
+    "@rematch/loading": "^2.1.2",
     "@rematch/persist": "^2.1.2",
     "@rematch/select": "^3.1.2",
     "@supabase/supabase-js": "^1.35.6",
