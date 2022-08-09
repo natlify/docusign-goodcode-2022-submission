@@ -1,7 +1,6 @@
 import{ useState } from 'react';
 import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack } from '@mantine/core';
 import {
-  TablerIcon,
   IconHome2,
   IconGauge,
   IconDeviceDesktopAnalytics,
@@ -37,13 +36,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
-// interface NavbarLinkProps {
-//   icon: TablerIcon;
-//   label: string;
-//   active?: boolean;
-//   onClick?(): void;
-// }
 
 function NavbarLink({ icon: Icon, label,to , end = false}) {
   const { classes, cx } = useStyles();

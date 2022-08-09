@@ -28,4 +28,5 @@ export const theme = {
       "#00160d",
     ],
   },
+  primaryColor: "primary",
 };

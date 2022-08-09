@@ -6,9 +6,10 @@ import {
   Badge,
   createStyles,
   Button,
+  Progress,
 } from "@mantine/core";
-import { ActionIcon, Avatar } from "@mantine/core";
-import { IconHeart, IconBookmark, IconShare, IconBolt } from "@tabler/icons";
+import { Avatar } from "@mantine/core";
+import { IconBolt } from "@tabler/icons";
 
 import { IconDiscountCheck, IconFlame, IconLiveView } from "@tabler/icons";
 import { convertDateToRelativeString, fromSnaketoTitle } from "../utils/string";
@@ -137,13 +138,25 @@ export default function ImageCard({ data, index }) {
 
       <Group mt="lg">
         <Avatar src={author.image} radius="sm" />
-        <div>
+        <div style={{ flex: 1 }}>
           <Text size="sm" weight={500}>
             {author.name}
           </Text>
-          <Text size="xs" color="dimmed">
-            Uploaded {convertDateToRelativeString(record.createdAt)}
-          </Text>
+          {category === "IN_REVIEW" ? (
+            <Progress
+              sections={[
+                { value: 30, color: "yellow" },
+                { value: 30, color: "orange" },
+              ]}
+              mt="md"
+              size="xs"
+              radius="sm"
+            />
+          ) : (
+            <Text size="xs" color="dimmed">
+              Uploaded {convertDateToRelativeString(record.createdAt)}
+            </Text>
+          )}
         </div>
       </Group>
 
@@ -153,17 +166,32 @@ export default function ImageCard({ data, index }) {
             {footer}
           </Text> */}
           <Group spacing={"md"}>
-            <Button size="xs" variant="light">
+            <Button
+              disabled={category !== "NONE"}
+              size="xs"
+              variant="light"
+              color="indigo"
+            >
               <IconBolt size={18} color={theme.colors.orange[7]} stroke={1.5} />
               Secure
             </Button>
-            <Button
-              size="xs"
-              variant="gradient"
-              gradient={{ from: "#51cf66", to: "#2b8a3e", deg: 160 }}
-            >
-              Verify
-            </Button>
+            {category !== "NONE" ? (
+              <Button
+                size="xs"
+                variant={"gradient"}
+                gradient={{ from: "#51cf66", to: "#2b8a3e", deg: 160 }}
+              >
+                &nbsp; View &nbsp;
+              </Button>
+            ) : (
+              <Button
+                size="xs"
+                variant={"gradient"}
+                gradient={{ from: "#51cf66", to: "#2b8a3e", deg: 160 }}
+              >
+                Verify
+              </Button>
+            )}
           </Group>
         </Group>
       </Card.Section>

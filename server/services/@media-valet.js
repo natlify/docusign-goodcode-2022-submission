@@ -30,7 +30,7 @@ export const generateAccessToken = async () => {
   const tokenParams = {
     username: "creedcode2022@gmail.com",
     password: "CreedCode123#",
-    scope: "api",
+    scope: "api offline_access",
   };
 
   try {

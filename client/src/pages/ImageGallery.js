@@ -34,7 +34,7 @@ const ImageGallery = () => {
     getTasks();
   }, []);
   if (isLoading) {
-    return <Loading />;
+  return <Loading />;
   }
   return (
     <Container>
