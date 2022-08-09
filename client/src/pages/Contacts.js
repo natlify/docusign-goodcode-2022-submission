@@ -1,14 +1,18 @@
 import { Center, Container, Stack } from "@mantine/core";
+import { ContactBook } from "../components/ContactBook";
 import { PageLayout } from "../layouts/PageLayout";
+import mockContacts from "../data/contacts.json";
 
 const Contacts = () => {
   return (
     <Container>
       <PageLayout
         pageTitle={"Contacts"}
-        pageDesc="Cillum velit pariatur sint elit laboris. Officia consectetur non i quis proident nisi do sit. Sunt dolor aute velit aute."
+        pageDesc="View &amp; Manage list of external contacts. Portal users will be given an option to choose external reviewers from the following list while requesting for approvals"
       >
-        <Stack my={20}>My custom Content</Stack>
+        <Stack my={20}>
+          <ContactBook data={mockContacts} />
+        </Stack>
       </PageLayout>
     </Container>
   );
