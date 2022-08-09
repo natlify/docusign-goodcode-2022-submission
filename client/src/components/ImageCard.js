@@ -101,7 +101,7 @@ const mockData = {
   ],
 };
 
-export default function ImageCard({ data, index }) {
+export default function ImageCard({ data, index, onTriggerClick }) {
   const { classes, theme } = useStyles();
   const {
     media,
@@ -188,6 +188,7 @@ export default function ImageCard({ data, index }) {
                 size="xs"
                 variant={"gradient"}
                 gradient={{ from: "#51cf66", to: "#2b8a3e", deg: 160 }}
+                onClick={() => onTriggerClick(data)}
               >
                 Verify
               </Button>

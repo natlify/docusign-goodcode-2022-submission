@@ -1,4 +1,11 @@
-import { Button, Container, Group, SimpleGrid, Text } from "@mantine/core";
+import {
+  Button,
+  Container,
+  Group,
+  LoadingOverlay,
+  SimpleGrid,
+  Text,
+} from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconBug, IconCross } from "@tabler/icons";
 import { useState, useEffect } from "react";
@@ -8,10 +15,25 @@ import Loading from "../components/Loading";
 
 const ImageGallery = () => {
   const imageData = useSelector((root) => root.ctImages.list);
-  const isLoading = useSelector((root) => root.loading.models.ctImages);
+  const isLoading = useSelector(
+    (root) => root.loading.effects.ctImages.fetchDataFromSources,
+  );
+  const handleVerifyFlow = async (imageData) => {
+    const redirectURL = await dispatch.ctImages.triggerDocuSignDocumentFlow({
+      imageData,
+    });
+  };
   const items = imageData.map((item, index) => (
-    <ImageCard key={item.id} data={item} index={index} />
+    <ImageCard
+      key={item.id}
+      data={item}
+      index={index}
+      onTriggerClick={handleVerifyFlow}
+    />
   ));
+  const visible = useSelector(
+    (root) => root.loading.effects.ctImages.triggerDocuSignDocumentFlow,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,14 +56,17 @@ const ImageGallery = () => {
     getTasks();
   }, []);
   if (isLoading) {
-  return <Loading />;
+    return <Loading />;
   }
   return (
-    <Container>
-      <SimpleGrid spacing={50} cols={3}>
-        {items}
-      </SimpleGrid>
-    </Container>
+    <>
+      <Container>
+        <LoadingOverlay visible={visible} overlayBlur={2} />
+        <SimpleGrid spacing={50} cols={3}>
+          {items}
+        </SimpleGrid>
+      </Container>
+    </>
   );
 };
 

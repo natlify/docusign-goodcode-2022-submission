@@ -15,7 +15,7 @@ export const ctImages = {
   effects: (dispatch) => ({
     async fetchDataFromSources({ folderId }, rootState) {
       const responseData = await Api.get(
-        `/api/media-valet/folder/${folderId}/assets`,
+        `/media-valet/folder/${folderId}/assets`,
       );
       const {
         payload: { assets: mvImageList },
@@ -49,6 +49,36 @@ export const ctImages = {
     async incrementAsync(payload, rootState) {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch.count.increment(payload);
+    },
+
+    async triggerDocuSignDocumentFlow(
+      { imageData, receipients, userDetails, isSensitive },
+      rootState,
+    ) {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      /** extract Camera name from the title */
+      // For NOW HardCode it as the images don't follow the naming convention
+      const CAMERA_NAME_ID = "CAM_52663";
+
+      /** STEP 2 MAke the API Call to Survey123 to get the data */
+      const survey123MetaData = await Api.get(
+        `/arcgis/survey123/camera/${CAMERA_NAME_ID}`,
+      );
+
+      /** STEP 3 Combine both the Data and make API call to our backend */
+      const redirectURL = await Api.post(`/camera-trap/triggerFlow`, {
+        recipients: {
+          signerEmail: "arjith496@gmail.com", // should be read from the userDetails
+          signerFullName: "Arjith N",
+          reviewers: [], // reviewers will be empty for normal flow (non-sensitive)
+        },
+        signerClientId: "3400",
+        isSensitive: false,
+        mediaValetData: imageData,
+        survey123Data: survey123MetaData,
+      });
+      console.log(JSON.stringify(survey123MetaData, null, 4));
     },
   }),
 };
