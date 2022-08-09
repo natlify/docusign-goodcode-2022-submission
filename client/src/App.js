@@ -1,14 +1,32 @@
-import AppShellDemo from "./layouts/AppLayout/Shell";
-import ImageGallery from "./pages/ImageGallery";
+import { MantineProvider } from "@mantine/core";
+import { ModalsProvider } from "@mantine/modals";
+import { NotificationsProvider } from "@mantine/notifications";
+import { BrowserRouter } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
+import { Provider } from "react-redux";
+import store from "./config/store";
 
-// import MyMap from "./components/MyMap";
+import "./styles/main.css";
+import { modalProps } from "./utils/modalProps";
+import { theme } from "./styles/theme";
+import Root from "./routes/Root";
 
-function App() {
+const App = () => {
   return (
-    <AppShellDemo>
-      <ImageGallery />
-    </AppShellDemo>
+    <Provider store={store}>
+      <MantineProvider withGlobalStyles withNormalizeCS theme={theme}>
+        <NotificationsProvider position="bottom-right" limit={4}>
+          <ModalsProvider modals={{}} modalProps={modalProps}>
+            <BrowserRouter>
+              <HelmetProvider>
+                <Root />
+              </HelmetProvider>
+            </BrowserRouter>
+          </ModalsProvider>
+        </NotificationsProvider>
+      </MantineProvider>
+    </Provider>
   );
-}
+};
 
 export default App;

@@ -101,7 +101,12 @@ const mockData = {
   ],
 };
 
-export default function ImageCard({ data, index, onTriggerClick }) {
+export default function ImageCard({
+  data,
+  index,
+  onTriggerClick,
+  onSensitiveClick,
+}) {
   const { classes, theme } = useStyles();
   const {
     media,
@@ -171,6 +176,7 @@ export default function ImageCard({ data, index, onTriggerClick }) {
               size="xs"
               variant="light"
               color="indigo"
+              onClick={onSensitiveClick}
             >
               <IconBolt size={18} color={theme.colors.orange[7]} stroke={1.5} />
               Secure
