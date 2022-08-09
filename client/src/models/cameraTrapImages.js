@@ -52,10 +52,12 @@ export const ctImages = {
     },
 
     async triggerDocuSignDocumentFlow(
-      { imageData, receipients, userDetails, isSensitive },
+      { imageData, reviewers, userDetails, isSensitive },
       rootState,
     ) {
       await new Promise((resolve) => setTimeout(resolve, 3000));
+
+      const { user } = rootState;
 
       /** extract Camera name from the title */
       // For NOW HardCode it as the images don't follow the naming convention
@@ -69,8 +71,8 @@ export const ctImages = {
       /** STEP 3 Combine both the Data and make API call to our backend */
       const redirectURL = await Api.post(`/camera-trap/triggerFlow`, {
         recipients: {
-          signerEmail: "arjith496@gmail.com", // should be read from the userDetails
-          signerFullName: "Arjith N",
+          signerEmail: user.email, // should be read from the userDetails
+          signerFullName: user.fullName,
           reviewers: [], // reviewers will be empty for normal flow (non-sensitive)
         },
         signerClientId: "3400",
@@ -78,6 +80,7 @@ export const ctImages = {
         mediaValetData: imageData,
         survey123Data: survey123MetaData,
       });
+      /** STEP 4 Insert into supabase for tracking statuses */
       console.log(JSON.stringify(survey123MetaData, null, 4));
     },
   }),

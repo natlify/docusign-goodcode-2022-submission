@@ -8,7 +8,7 @@ import models from "../models";
 const persistConfig = {
   key: "neverGonnaGiveYouUp!",
   storage,
-  whitelist: ["count"],
+  whitelist: ["count", "user"],
 };
 const store = init({
   models,

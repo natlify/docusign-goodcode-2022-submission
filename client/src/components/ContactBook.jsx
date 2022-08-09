@@ -39,9 +39,6 @@ const useStyles = createStyles((theme) => ({
     height: 21,
     borderRadius: 21,
   },
-  scrolled: {
-    boxShadow: theme.shadows.sm,
-  },
 }));
 
 function Th({ children, reversed, sorted, onSort }) {
@@ -69,6 +66,7 @@ function Th({ children, reversed, sorted, onSort }) {
 
 function filterData(data, search) {
   const query = search.toLowerCase().trim();
+  console.log(data);
   return data.filter((item) =>
     keys(data[0]).some((key) => item[key].toLowerCase().includes(query)),
   );
@@ -86,7 +84,6 @@ function sortData(data, payload) {
       if (payload.reversed) {
         return b[sortBy].localeCompare(a[sortBy]);
       }
-
       return a[sortBy].localeCompare(b[sortBy]);
     }),
     payload.search,
@@ -94,12 +91,10 @@ function sortData(data, payload) {
 }
 
 export function ContactBook({ data }) {
-  const { classes, cx } = useStyles();
   const [search, setSearch] = useState("");
   const [sortedData, setSortedData] = useState(data);
   const [sortBy, setSortBy] = useState(null);
   const [reverseSortDirection, setReverseSortDirection] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
   const setSorting = (field) => {
     const reversed = field === sortBy ? !reverseSortDirection : false;
@@ -136,29 +131,28 @@ export function ContactBook({ data }) {
       <Table
         horizontalSpacing="md"
         verticalSpacing="xs"
-        sx={{ height: 100, tableLayout: "fixed", minWidth: 700 }}
-        onScrollPositionChange={({ y }) => setScrolled(y !== 0)}
+        sx={{ tableLayout: "fixed", minWidth: 700 }}
       >
-        <thead className={cx(classes.header, { [classes.scrolled]: scrolled })}>
+        <thead>
           <tr>
             <Th
-              sorted={sortBy === "name"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("name")}
+            // sorted={sortBy === "name"}
+            // reversed={reverseSortDirection}
+            // onSort={() => setSorting("name")}
             >
               Name
             </Th>
             <Th
-              sorted={sortBy === "email"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("email")}
+            // sorted={sortBy === "email"}
+            // reversed={reverseSortDirection}
+            // onSort={() => setSorting("email")}
             >
               Email
             </Th>
             <Th
-              sorted={sortBy === "company"}
-              reversed={reverseSortDirection}
-              onSort={() => setSorting("company")}
+            // sorted={sortBy === "company"}
+            // reversed={reverseSortDirection}
+            // onSort={() => setSorting("company")}
             >
               Company
             </Th>
@@ -169,7 +163,7 @@ export function ContactBook({ data }) {
             rows
           ) : (
             <tr>
-              <td colSpan={Object.keys(data[0]).length}>
+              <td colSpan={4}>
                 <Text weight={500} align="center">
                   Nothing found
                 </Text>
