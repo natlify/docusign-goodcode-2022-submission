@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "build": "cd client && npm install && npm run build",
+    "build": "cd client && npm install --force && npm run build",
     "prepare": "husky install",
     "dev": "nodemon server/index.js"
   },
@@ -38,6 +38,7 @@
     "express-session": "^1.17.2",
     "helmet": "^5.1.1",
     "image-to-base64": "^2.2.0",
+    "lodash": "^4.17.21",
     "morgan": "^1.10.0",
     "open": "^8.4.0",
     "pg": "^8.7.3",

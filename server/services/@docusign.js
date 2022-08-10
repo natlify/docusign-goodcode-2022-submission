@@ -45,7 +45,6 @@ export const addDocumentToEnvelopeDraft = async (document, args) => {
 };
 
 export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
-  console.log(envelopeArgs);
   let envlp = new eSignSdk.EnvelopeDefinition();
   envlp.templateId = process.env.DS_SENTINELS_TEMPLATE;
   envlp.brandId = envelopeArgs.brandId;
@@ -93,6 +92,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
   };
 
   envlp.templateRoles = [firstVerifier, ...additionalReviewers];
+
   envlp.status = "sent";
 
   return envlp;
@@ -168,8 +168,6 @@ export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
   eSignApi.setBasePath(ESignBasePath);
   eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
   let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
-
-  console.log(args.envelopeArgs.recipients);
 
   // Create the recipient view request object
   const viewRequest = new eSignSdk.RecipientViewRequest.constructFromObject({

@@ -66,7 +66,6 @@ function Th({ children, reversed, sorted, onSort }) {
 
 function filterData(data, search) {
   const query = search.toLowerCase().trim();
-  console.log(data);
   return data.filter((item) =>
     keys(data[0]).some((key) => item[key].toLowerCase().includes(query)),
   );

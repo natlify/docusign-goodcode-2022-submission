@@ -1,15 +1,16 @@
 import path from "path";
 import express from "express";
 import cookieParser from "cookie-parser";
+import { eventsRouter } from "./routes/events.js";
 import { arcGISRouter } from "./routes/arcgis.js";
 import { eSignRouter } from "./routes/eSignature.js";
 import { mediaValetRouter } from "./routes/mediaValet.js";
+import { docuSignAuthRouter } from "./routes/docuSignJwt.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import session from "express-session";
 import cors from "cors";
 import "dotenv/config";
-import { docuSignAuthRouter } from "./routes/docuSignJwt.js";
 // import helmet from "helmet";
 import morgan from "morgan";
 
@@ -55,6 +56,7 @@ app.use("/api/arcgis", arcGISRouter);
 app.use("/api/media-valet", mediaValetRouter);
 app.use("/api/docusign/auth", docuSignAuthRouter);
 app.use("/api/camera-trap", eSignRouter);
+app.use("/api/docusign-connect", eventsRouter);
 
 if (process.env.NODE_ENV === "production") {
   // eslint-disable-next-line no-console

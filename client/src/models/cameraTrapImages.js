@@ -91,6 +91,8 @@ export const ctImages = {
         color: "green",
       });
 
+      console.log(redirectResult);
+      
       /** STEP 4 Insert into supabase for tracking statuses */
       await supabase.from("camera_trap_assets").upsert([
         {

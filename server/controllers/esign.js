@@ -29,7 +29,6 @@ export default class eSignController {
       const envelopeDefinition =
         docusign.constructCameraTrapVerificationEnvelope(args.envelopeArgs);
 
-      console.log(envelopeDefinition);
       /** STEP 2 create the envelope in Draft Stage */
       const envelopeIdInDraft = await docusign.createEnvelopeDraft(
         envelopeDefinition,
