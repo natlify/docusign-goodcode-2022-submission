@@ -11,24 +11,27 @@ import Settings from "../pages/Settings"
 import Identity from "../pages/Identity"
 import Contacts from "../pages/Contacts"
 import Schedule from "../pages/Schedule"
+import DocuSignEvents from "../pages/DocuSignEvents";
 
 const Root = () => {
-    return (  
-    <Routes>
+    return (
+      <Routes>
         <Route index element={<LandingPage />} />
         <Route path="app" element={<AppLayout />}>
-          <Route index  element={<ImageGallery />} />
-          <Route path="dashboard" element={<Dashboard/>} />
-          <Route path="analytics" element={<Analytics/>} />
-          <Route path="schedules" element={<Schedule/>} />
-          <Route path="contacts" element={<Contacts/>} />
-          <Route path="admin-iam" element={<Identity/>} />
-          <Route path="settings" element={<Settings/>} />
+          <Route index element={<ImageGallery />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="schedules" element={<Schedule />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route path="admin-iam" element={<Identity />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="successful-verification" element={<DocuSignEvents />} />
           <Route path="*" element={<UserErrorPage />} />
         </Route>
-         <Route path="*" element={<GuestOrApiErrorPage/>} />
+        <Route path="*" element={<GuestOrApiErrorPage />} />
       </Routes>
-    )
+    );
 }
 
 export default Root

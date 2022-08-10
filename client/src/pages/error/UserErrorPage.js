@@ -6,6 +6,7 @@ import {
   Button,
   Group,
 } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { Illustration } from "./Illustration";
 
 const useStyles = createStyles((theme) => ({
@@ -77,7 +78,9 @@ const UserErrorPage = () => {
             this is an error contact support.
           </Text>
           <Group position="center">
-            <Button size="md">Take me back to home page</Button>
+            <Link to="/app">
+              <Button size="md">Take me back to main page</Button>
+            </Link>
           </Group>
         </div>
       </div>

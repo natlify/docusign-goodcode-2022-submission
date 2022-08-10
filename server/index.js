@@ -1,8 +1,6 @@
 import path from "path";
 import express from "express";
 import cookieParser from "cookie-parser";
-import { taskRouter } from "./routes/task.js";
-import { labelRouter } from "./routes/label.js";
 import { arcGISRouter } from "./routes/arcgis.js";
 import { eSignRouter } from "./routes/eSignature.js";
 import { mediaValetRouter } from "./routes/mediaValet.js";
@@ -53,8 +51,6 @@ app.get("/api", (req, res) => {
 });
 
 // Routers
-app.use("/api/task", taskRouter);
-app.use("/api/label", labelRouter);
 app.use("/api/arcgis", arcGISRouter);
 app.use("/api/media-valet", mediaValetRouter);
 app.use("/api/docusign/auth", docuSignAuthRouter);
@@ -72,5 +68,5 @@ if (process.env.NODE_ENV === "production") {
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`Server listening on ${PORT}`);
+  console.log(`🗸 App Started without Errors : Server listening on ${PORT}`);
 });
