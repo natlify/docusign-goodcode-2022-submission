@@ -1,14 +1,12 @@
 const initialState = {
   username: null,
-  fullName: "",
-  email: "",
-  role: "",
+  fullName: "Arjith Natarajan",
+  email: "hbthck@gmail.com",
+  role: "Black Badge",
 };
 
 export const user = {
-  state: {
-    username: null,
-  },
+  state: initialState,
   reducers: {
     setUserData(state, payload) {
       return { ...state, payload };

@@ -2,7 +2,7 @@ export const modalProps = {
   centered: true,
   styles: (theme) => ({
     modal: {
-      width: 600,
+      width: 800,
     },
   }),
 };

@@ -11,6 +11,8 @@ import {
   Indicator,
   HoverCard,
   Popover,
+  Stack,
+  Badge,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import {
@@ -22,6 +24,7 @@ import {
   IconBell,
 } from "@tabler/icons";
 import Logo from "../../components/icons/Logo";
+import { useSelector } from "react-redux";
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -110,6 +113,8 @@ export default function HeaderMiddle() {
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
 
+  const loggedInUser = useSelector((root) => root.user);
+
   const items = links.map((link) => (
     <a key={link.label} href={link.link} className={classes.link}>
       <Group spacing={5}>
@@ -164,7 +169,13 @@ export default function HeaderMiddle() {
               </ActionIcon>
             </HoverCard.Target>
             <HoverCard.Dropdown>
-              <Text size="sm">Account Details Shown here</Text>
+              <Group spacing={"xs"}>
+                <Text size="xs">User</Text>
+                <Text size="md">{loggedInUser.email}</Text>
+                <Badge size="xs" color="dark">
+                  {loggedInUser.role}
+                </Badge>
+              </Group>
             </HoverCard.Dropdown>
           </HoverCard>
         </Group>

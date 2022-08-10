@@ -45,6 +45,7 @@ export const addDocumentToEnvelopeDraft = async (document, args) => {
 };
 
 export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
+  console.log(envelopeArgs);
   let envlp = new eSignSdk.EnvelopeDefinition();
   envlp.templateId = process.env.DS_SENTINELS_TEMPLATE;
   envlp.brandId = envelopeArgs.brandId;
@@ -72,13 +73,13 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
         name: "CameraImageId",
         show: "true",
         fieldId: "10735428877",
-        value: mediaValetData.title,
+        value: mediaValetData.id,
       },
       {
         name: "Area",
         show: "true",
         fieldId: "10735428879",
-        value: survey123Data.areaDeployed,
+        value: survey123Data.attributes.name_of_the_area_deployed,
       },
     ],
     listCustomFields: [

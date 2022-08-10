@@ -2,9 +2,13 @@ import {
   Button,
   Container,
   Group,
+  List,
   LoadingOverlay,
   SimpleGrid,
+  Stack,
+  Switch,
   Text,
+  Title,
 } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { IconBug, IconCross } from "@tabler/icons";
@@ -12,31 +16,36 @@ import { useState, useEffect } from "react";
 import ImageCard from "../components/ImageCard";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import Loading from "../components/Loading";
-import { openConfirmModal } from "@mantine/modals";
+import { openConfirmModal, openModal } from "@mantine/modals";
+import SensitiveModal from "../components/SensitiveModal";
 
 const ImageGallery = () => {
   const imageData = useSelector((root) => root.ctImages.list);
   const isLoading = useSelector(
     (root) => root.loading.effects.ctImages.fetchDataFromSources,
   );
-  const handleVerifyFlow = async (imageData) => {
+  const handleVerifyFlow = async (
+    imageData,
+    isSensitive = false,
+    reviewers = [],
+  ) => {
     const redirectURL = await dispatch.ctImages.triggerDocuSignDocumentFlow({
       imageData,
+      isSensitive,
+      reviewers,
     });
   };
 
-  const openModal = (imageData) =>
-    openConfirmModal({
-      title: "Please confirm your action",
+  const openNextFlowModal = (imageData) =>
+    openModal({
+      title: <Title order={5}>🔒 Secure Images With</Title>,
       children: (
-        <Text size="sm">
-          This action is so important that you are required to confirm it with a
-          modal. Please click one of these buttons to proceed.
-        </Text>
+        <SensitiveModal
+          onConfirmHandler={({ isSensitive, reviewers }) =>
+            handleVerifyFlow(imageData, isSensitive, reviewers)
+          }
+        />
       ),
-      labels: { confirm: "Confirm", cancel: "Cancel" },
-      onCancel: () => console.log("Cancel"),
-      onConfirm: () => console.log("Confirmed"),
     });
 
   const items = imageData.map((item, index) => (
@@ -44,7 +53,7 @@ const ImageGallery = () => {
       key={item.id}
       data={item}
       index={index}
-      onSensitiveClick={openModal}
+      onSensitiveClick={() => openNextFlowModal(item)}
       onTriggerClick={handleVerifyFlow}
     />
   ));

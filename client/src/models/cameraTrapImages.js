@@ -52,10 +52,10 @@ export const ctImages = {
     },
 
     async triggerDocuSignDocumentFlow(
-      { imageData, reviewers, userDetails, isSensitive },
+      { imageData, reviewers = [], isSensitive = false },
       rootState,
     ) {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      // await new Promise((resolve) => setTimeout(resolve, 3000));
 
       const { user } = rootState;
 
@@ -73,15 +73,14 @@ export const ctImages = {
         recipients: {
           signerEmail: user.email, // should be read from the userDetails
           signerFullName: user.fullName,
-          reviewers: [], // reviewers will be empty for normal flow (non-sensitive)
+          reviewers, // reviewers will be empty for normal flow (non-sensitive)
         },
         signerClientId: "3400",
-        isSensitive: false,
+        isSensitive,
         mediaValetData: imageData,
         survey123Data: survey123MetaData,
       });
       /** STEP 4 Insert into supabase for tracking statuses */
-      console.log(JSON.stringify(survey123MetaData, null, 4));
     },
   }),
 };
