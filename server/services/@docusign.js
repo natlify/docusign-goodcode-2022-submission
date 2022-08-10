@@ -93,7 +93,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
   };
 
   envlp.templateRoles = [firstVerifier, ...additionalReviewers];
-  envlp.status = "created";
+  envlp.status = "sent";
 
   return envlp;
 };
@@ -169,10 +169,12 @@ export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
   eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
   let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
 
+  console.log(args.envelopeArgs.recipients);
+
   // Create the recipient view request object
   const viewRequest = new eSignSdk.RecipientViewRequest.constructFromObject({
     authenticationMethod: "none",
-    clientUserId: args.envelopeArgs.signerClientId,
+    // clientUserId: args.envelopeArgs.signerClientId,
     recipientId: "1",
     returnUrl: args.envelopeArgs.redirectUrl,
     userName: args.envelopeArgs.recipients.signerFullName,

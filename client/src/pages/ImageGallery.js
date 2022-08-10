@@ -29,11 +29,12 @@ const ImageGallery = () => {
     isSensitive = false,
     reviewers = [],
   ) => {
-    const redirectURL = await dispatch.ctImages.triggerDocuSignDocumentFlow({
+    const redirectUrl = await dispatch.ctImages.triggerDocuSignDocumentFlow({
       imageData,
       isSensitive,
       reviewers,
     });
+    window.location = redirectUrl;
   };
 
   const openNextFlowModal = (imageData) =>

@@ -1,6 +1,9 @@
 import Api from "../api/zapeneApi";
 import { supabase } from "../utils/supabase";
 import _ from "lodash";
+import { showNotification } from "@mantine/notifications";
+import { IconBug, IconCheck } from "@tabler/icons";
+import { closeAllModals } from "@mantine/modals";
 const initialState = {
   list: [],
 };
@@ -69,7 +72,7 @@ export const ctImages = {
       );
 
       /** STEP 3 Combine both the Data and make API call to our backend */
-      const redirectURL = await Api.post(`/camera-trap/triggerFlow`, {
+      const redirectResult = await Api.post(`/camera-trap/triggerFlow`, {
         recipients: {
           signerEmail: user.email, // should be read from the userDetails
           signerFullName: user.fullName,
@@ -80,7 +83,27 @@ export const ctImages = {
         mediaValetData: imageData,
         survey123Data: survey123MetaData,
       });
+
+      showNotification({
+        title: "Document Generated",
+        message: "DocuSign Envelope Generated",
+        icon: <IconCheck size={15} />,
+        color: "green",
+      });
+
       /** STEP 4 Insert into supabase for tracking statuses */
+      await supabase.from("camera_trap_assets").upsert([
+        {
+          asset_id: imageData.id,
+          title: imageData.title,
+          status: "IN_REVIEW",
+          is_sensitive: isSensitive,
+          docusign_envelope_id: redirectResult.envelopeId,
+        },
+      ]);
+
+      closeAllModals();
+      return redirectResult.redirectUrl;
     },
   }),
 };

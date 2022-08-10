@@ -10,7 +10,7 @@ export default class eSignController {
     
     const envelopeArgs = {
       ...body,
-      redirectUrl: "http://localhost:3000/successful-verification",
+      redirectUrl: "http://localhost:3000/app/successful-verification",
       healthCheckEndPoint: "http://localhost:3000",
     };
 
@@ -22,7 +22,7 @@ export default class eSignController {
       accountId: process.env.DS_API_ACCOUNT_ID,
       envelopeArgs,
     };
-    
+
     let results = null;
     try {
       /** STEP 1 create the envelope definition that sets up the workflows */
@@ -30,13 +30,13 @@ export default class eSignController {
         docusign.constructCameraTrapVerificationEnvelope(args.envelopeArgs);
 
       console.log(envelopeDefinition);
-      // /** STEP 2 create the envelope in Draft Stage */
-      // const envelopeIdInDraft = await docusign.createEnvelopeDraft(
-      //   envelopeDefinition,
-      //   args,
-      // );
+      /** STEP 2 create the envelope in Draft Stage */
+      const envelopeIdInDraft = await docusign.createEnvelopeDraft(
+        envelopeDefinition,
+        args,
+      );
 
-      // args.envelopeId = envelopeIdInDraft;
+      args.envelopeId = envelopeIdInDraft;
 
       // /** STEP 3 construct the Document with survery123 & mediaValet Data */
       // const CTIMDV_Document = await docusign.generateDocumentPopulatedWithData(
@@ -57,15 +57,15 @@ export default class eSignController {
       // await docusign.sendEnvelope(args);
 
       // /** STEP 6 Generate URL for embedded signing */
-      // const embeddedSigningURL = await docusign.getEmbeddedRecipientViewUrl(
-      //   envelopeIdInDraft,
-      //   args,
-      // );
+      const embeddedSigningURL = await docusign.getEmbeddedRecipientViewUrl(
+        envelopeIdInDraft,
+        args,
+      );
 
-      // results = {
-      //   envelopeId: args.envelopeId,
-      //   redirectUrl: embeddedSigningURL,
-      // };
+      results = {
+        envelopeId: args.envelopeId,
+        redirectUrl: embeddedSigningURL,
+      };
     } catch (error) {
       console.log(error);
       throw new Error(error.message);
