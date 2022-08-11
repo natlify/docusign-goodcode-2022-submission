@@ -36,7 +36,7 @@ const StatusBadge = ({ status }) => {
         </Badge>
       );
 
-    case "VERIFIED":
+    case "APPROVED":
       return (
         <Badge color="green" variant="light">
           <Group position="center" spacing={"xs"}>

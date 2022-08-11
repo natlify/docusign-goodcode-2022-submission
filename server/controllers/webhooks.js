@@ -4,8 +4,8 @@ import _ from "lodash";
 
 export default class webHooksController {
   static handleDocusignConnectEvents = async (req) => {
-    // const {body} = req ;
-    const body = sampleEvent;
+    const { body } = req;
+    // const body = sampleEvent;
     const { data, event } = body;
     console.log(body);
     if (event === "envelope-completed") {
@@ -34,7 +34,9 @@ export default class webHooksController {
       );
       return metaDataAsObj;
     }
-  };
+
+    // Insert into notifications table for streaming
+  };;
 }
 
 // console.log(await webHooksController.handleDocusignConnectEvents());
