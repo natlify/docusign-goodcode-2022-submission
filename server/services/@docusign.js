@@ -93,7 +93,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
 
   envlp.templateRoles = [firstVerifier, ...additionalReviewers];
 
-  envlp.status = "sent";
+  envlp.status = "created";
 
   return envlp;
 };

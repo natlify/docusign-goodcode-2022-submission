@@ -1,29 +1,19 @@
-import {
-  Button,
-  Container,
-  Group,
-  List,
-  LoadingOverlay,
-  SimpleGrid,
-  Stack,
-  Switch,
-  Text,
-  Title,
-} from "@mantine/core";
-import { showNotification } from "@mantine/notifications";
-import { IconBug, IconCross } from "@tabler/icons";
-import { useState, useEffect } from "react";
-import ImageCard from "../components/ImageCard";
-import { useDispatch, useSelector, useStore } from "react-redux";
-import Loading from "../components/Loading";
-import { openConfirmModal, openModal } from "@mantine/modals";
-import SensitiveModal from "../components/SensitiveModal";
+import { Container, LoadingOverlay, SimpleGrid, Title } from "@mantine/core"
+import { showNotification } from "@mantine/notifications"
+import { IconBug } from "@tabler/icons"
+import { useEffect } from "react"
+import ImageCard from "../components/ImageCard"
+import { useDispatch, useSelector } from "react-redux"
+import Loading from "../components/Loading"
+import { openModal } from "@mantine/modals"
+import SensitiveModal from "../components/SensitiveModal"
 
 const ImageGallery = () => {
-  const imageData = useSelector((root) => root.ctImages.list);
+  const imageData = useSelector((root) => root.ctImages.list)
   const isLoading = useSelector(
     (root) => root.loading.effects.ctImages.fetchDataFromSources,
-  );
+  )
+  const showDocuSignClick = useSelector((root) => !root.user.acceptedClick)
   const handleVerifyFlow = async (
     imageData,
     isSensitive = false,
@@ -33,9 +23,9 @@ const ImageGallery = () => {
       imageData,
       isSensitive,
       reviewers,
-    });
-    window.location = redirectUrl;
-  };
+    })
+    window.location = redirectUrl
+  }
 
   const openNextFlowModal = (imageData) =>
     openModal({
@@ -47,7 +37,28 @@ const ImageGallery = () => {
           }
         />
       ),
-    });
+    })
+
+  // useEffect(() => {
+  //   if (showDocuSignClick) {
+  //     // eslint-disable-next-line no-undef
+  //     docuSignClick.Clickwrap.render(
+  //       {
+  //         environment: "https://demo.docusign.net",
+  //         accountId: "77c8b115-51ee-4f06-9979-ca9e73968e8e",
+  //         clickwrapId: "a2a6a91f-131e-4d48-b15a-0bb7bfdd0d96",
+  //         clientUserId: "ZAP_WEB_CLIENT_9903",
+  //         documentData: {
+  //           fullName: "Arjith",
+  //           email: "arjith496@gmail.com",
+  //           company: "Zapene.app",
+  //           title: "CTO",
+  //         },
+  //       },
+  //       "#ds-clickwrap",
+  //     );
+  //   }
+  // }, []);
 
   const items = imageData.map((item, index) => (
     <ImageCard
@@ -57,11 +68,11 @@ const ImageGallery = () => {
       onSensitiveClick={() => openNextFlowModal(item)}
       onTriggerClick={handleVerifyFlow}
     />
-  ));
+  ))
   const visible = useSelector(
     (root) => root.loading.effects.ctImages.triggerDocuSignDocumentFlow,
-  );
-  const dispatch = useDispatch();
+  )
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getTasks = async () => {
@@ -69,7 +80,7 @@ const ImageGallery = () => {
         // setTasks(data);
         await dispatch.ctImages.fetchDataFromSources({
           folderId: "7d256341-06e2-4f2b-8d29-0d4ffc1856f5",
-        });
+        })
         // throw new Error("Sample Error Message");
       } catch (error) {
         showNotification({
@@ -77,13 +88,13 @@ const ImageGallery = () => {
           message: "Failed to fetch tasks",
           icon: <IconBug size={15} />,
           color: "red",
-        });
+        })
       }
-    };
-    getTasks();
-  }, []);
+    }
+    getTasks()
+  }, [])
   if (isLoading) {
-    return <Loading />;
+    return <Loading />
   }
   return (
     <>
@@ -94,7 +105,7 @@ const ImageGallery = () => {
         </SimpleGrid>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default ImageGallery;
+export default ImageGallery

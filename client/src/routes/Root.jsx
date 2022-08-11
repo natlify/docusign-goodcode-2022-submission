@@ -12,11 +12,13 @@ import Identity from "../pages/Identity"
 import Contacts from "../pages/Contacts"
 import Schedule from "../pages/Schedule"
 import DocuSignEvents from "../pages/DocuSignEvents";
+import Auth from "../pages/Auth";
 
 const Root = () => {
     return (
       <Routes>
         <Route index element={<LandingPage />} />
+        <Route path="auth" element={<Auth />} />
         <Route path="app" element={<AppLayout />}>
           <Route index element={<ImageGallery />} />
           <Route path="dashboard" element={<Dashboard />} />

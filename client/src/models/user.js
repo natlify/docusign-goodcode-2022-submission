@@ -3,6 +3,7 @@ const initialState = {
   fullName: "Arjith Natarajan",
   email: "hbthck@gmail.com",
   role: "Black Badge",
+  acceptedClick: false,
 };
 
 export const user = {

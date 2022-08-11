@@ -18,7 +18,8 @@
   "license": "ISC",
   "prettier": {
     "singleQuote": false,
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "semi": false
   },
   "dependencies": {
     "@esri/arcgis-rest-auth": "^4.0.2",
