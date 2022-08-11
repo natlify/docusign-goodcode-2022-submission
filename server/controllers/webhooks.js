@@ -1,15 +1,17 @@
-import sampleEvent from "../../common/data/sample-event-notification.json" assert { type: "json" };
 import { supabase } from "../services/@supabase.js";
 import _ from "lodash";
+import {
+  addKeyWords,
+  updateAltText,
+  updateAttributes,
+} from "../services/@media-valet.js";
 
 export default class webHooksController {
   static handleDocusignConnectEvents = async (req) => {
     const { body } = req;
-    // const body = sampleEvent;
-    const { data, event } = body;
-    console.log(body);
+    const { data, event, bearer_token } = body;
     if (event === "envelope-completed") {
-      const { data: updateData } = await supabase
+      await supabase
         .from("camera_trap_assets")
         .update({ status: "APPROVED" })
         .match({ docusign_envelope_id: data.envelopeId });
@@ -32,11 +34,47 @@ export default class webHooksController {
         },
         {},
       );
-      return metaDataAsObj;
+      const assetId = customDataAsObj.CameraImageId;
+      try {
+        await updateAltText({
+          assetId,
+          token: bearer_token,
+          altText: metaDataAsObj["z-alt-text"],
+        });
+
+        const originalKeyWords = tabs.textTabs
+          .filter((ele) => ele.tabLabel === "z-keywords-text")[0]
+          .originalValue.split(",")
+          .map((str) => str.trim());
+        const newKeyWords = metaDataAsObj["z-keywords-text"]
+          .split(",")
+          .map((str) => str.trim());
+        const difference = newKeyWords.filter(
+          (x) => !originalKeyWords.includes(x),
+        ); // to add
+        // const complement = originalKeyWords.filter(
+        //   (x) => !newKeyWords.includes(x),
+        // ); // to remove
+
+        await addKeyWords({
+          token: bearer_token,
+          assetId,
+          keyWordList: difference,
+        });
+
+        await updateAttributes({
+          assetId,
+          token: bearer_token,
+          lat: 96.8888,
+          long: 12.6666666,
+          isSensitive: false,
+        });
+        return { customDataAsObj };
+      } catch (error) {
+        throw new Error(error.message);
+      }
     }
 
     // Insert into notifications table for streaming
-  };;
+  };
 }
-
-// console.log(await webHooksController.handleDocusignConnectEvents());

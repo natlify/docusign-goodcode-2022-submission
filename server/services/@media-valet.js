@@ -69,3 +69,59 @@ export const fetchAllImagesFromCategory = ({ token, folderID }) =>
       Authorization: `bearer ${token}`,
     },
   });
+
+export const updateAltText = ({ token, assetId, altText }) =>
+  restApiInstance({
+    url: `/assets/${assetId}`,
+    method: "patch",
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+    data: [
+      {
+        op: "replace",
+        path: "/altText",
+        value: altText,
+      },
+    ],
+  });
+
+export const addKeyWords = ({ token, assetId, keyWordList }) =>
+  restApiInstance({
+    url: `/assets/${assetId}/keywords`,
+    method: "post",
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+    data: keyWordList,
+  });
+
+export const removeKeyWord = ({ token, assetId, keyWord }) =>
+  restApiInstance({
+    url: `/assets/${assetId}/keywords/${keyWord}`,
+    method: "delete",
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+  });
+
+export const updateAttributes = ({ token, assetId, lat, long }) =>
+  restApiInstance({
+    url: `/assets/${assetId}`,
+    method: "patch",
+    headers: {
+      Authorization: `bearer ${token}`,
+    },
+    data: [
+      {
+        op: "add",
+        path: "/attributes/c0c67677-b8eb-4522-844b-a4aeb9be7807",
+        value: lat,
+      },
+      {
+        op: "add",
+        path: "/attributes/6ce37da1-e78f-426a-9505-671fe9161272",
+        value: long,
+      },
+    ],
+  });

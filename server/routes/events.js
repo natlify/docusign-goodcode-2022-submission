@@ -1,8 +1,9 @@
 import express from "express";
+import { gainMediaValetAccessToken } from "../../common/middlewares.js";
 import webhooks from "../controllers/webhooks.js";
 const router = express.Router();
 
-router.post("", async (req, res) => {
+router.post("", gainMediaValetAccessToken, async (req, res) => {
   try {
     const response = await webhooks.handleDocusignConnectEvents(req);
     return res.status(200).json(response);
