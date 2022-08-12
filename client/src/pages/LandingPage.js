@@ -69,7 +69,7 @@ const LandingPage = () => {
                           className="border border-transparent shadow-sm transition-all
                             duration-150 group-hover:-translate-y-0.5 group-hover:shadow-lg
                             sm:w-auto"
-                          to="https://github.com/hbthck/OptimusPrime"
+                          to="https://github.com/hbthck/docusign-goodcode-2022-submission"
                         >
                           <a
                             target="_blank"
@@ -83,7 +83,7 @@ const LandingPage = () => {
                             <div>Source Code</div>
                           </a>
                         </Link>
-                        <Link to="/auth?action=sign_up">
+                        <Link to="/app">
                           <a className="inline-flex items-center justify-center rounded-md border border-transparent bg-red px-6 py-4 text-lg font-medium text-white shadow-sm  focus:outline-none focus:ring-2 focus:ring-offset-2 ">
                             <span>Get Started</span>
                             <IconArrowNarrowRight
@@ -149,7 +149,7 @@ const LandingPage = () => {
         </div>
       </div>
     </>
-  );
+  )
 };
 
 
