@@ -4,30 +4,36 @@ Being in tech for a few years now, I always asked myself the dreaded question �
 
 We were excited to partner with Jane Goodall Institution and help out in any tiny way that we could through this Hackathon.  The problem statement really intrigued us because it was a refreshing change from the usual SaaS, crypto or deep-tech projects that we work on.
 
-### App Idea
+### App Idea 💡
 
 ![The Robust Gameboy - Do you hear it?](https://static.wixstatic.com/media/c8261d_22c237bf2c35497b9d049a4755342f32~mv2.png/v1/fill/w_158,h_158,al_c/sameboy.png)
 Also our application is heavily inspired by [Nintendo GameBoy.](https://www.youtube.com/watch?v=Oy8zSYKkczI) We wanted to make our application pretty straightforward, same time intriguing. [UI] has only 4 buttons but does everything it needs to do. And more than anything, a plug & play module that can take in any platform and adapt to it.
+
+### Configurability
+
+Since the app is going to be used on ground by volunteers in remote areas, one thing we had to factor in is : How quickly things can change on ground. So we decided that we will keep most of the configuration out of the code so that reactive changes can be done without a developer's presence or need to update code.
+
+So we were clear that we wanted to use DocuSign Templates Extensively.
 
 ## What it does
 
 ![Highlights of Application](https://vgvkuskuhjjxyafyrwyp.supabase.co/storage/v1/object/public/bob-hub/supershot.png?t=2022-08-12T04%3A00%3A16.782Z)
 
-### Integrates Data from ArcGIS & Survey123 in 1-Click
+### 🗃📚 Integrates Data from ArcGIS & Survey123 in 1-Click
 
 Happens in background, probably you won't even notice
 
-### Generates a dynamic document and dispatches to signers
+### 🚀 Generates a dynamic document and dispatches to signers
 
 No filling of complex webforms any more. Documents within the DocuSign Envelope become validation application
 
-### Ultra Simple UI and Most wanted intuitive flows
+### 🍄 Ultra Simple UI and Most wanted intuitive flows
 
 Provision to handle sensitive images separately. 5yo can operate this.
 
-### In Built Security
+### 🔒 In Built Security
 
-Data doesn;’t get copied to any external servers including Zapene’s frontend. All processing happens on mediaValet and DocuSign Envelopes itself.
+Data doesn’t get copied to any external servers including Zapene’s frontend. All processing happens on mediaValet and DocuSign Envelopes itself.
 
 ## How we built it
 
@@ -51,27 +57,31 @@ DocuSign Auth Mechanism : JWT Grant
 ## Challenges we ran into
 
 The biggest challenge we tackled :
-We loved Power Forms for its simplicity and ease of integration, however we couldn’t extract the degree of customization we wanted to provide to our users. At the same time it was a huge task to configure everything via eSign APIs.
-We knew we wanted to have the best of worlds; where we leverage the DocuSign Dashboard to do & manage configurations, at the same time without losing the customization of our documents, its format and the richness.
+> **We loved Power Forms for its simplicity and ease of integration, however we couldn’t extract the degree of customization we wanted to provide to our users. At the same time it was a huge task to configure everything via eSign APIs.**
+> We knew we wanted to have the best of worlds; where we leverage the DocuSign Dashboard to do & manage configurations, at the same time without losing the customization of our documents, its format and the richness.
 This way we could keep configs outside of code, (better way to manage) and not churn out a lot of code, to create workflows.
-Few Other Challenges :
-Adding images & Dynamically generating docs
-Navigating through All SDKs’ docs & their nuances. **documentTemplateList** is an Object. but **documentTemplate** is an Array (List)!
-Working with envelope drafts
-Designing a system where all different platforms can work together
-Working with barebones REST Api for Media Valet
+
+### Few Other Challenges
+
+- Adding images to document during generation, rather than adding it as a separate document.
+- Navigating through All SDKs’ docs & their nuances. [`**documentTemplateList**` is an Object. but `**documentTemplate**` is an Array (List)!](https://i.imgflip.com/4wymjd.jpg)
+- Working with envelope drafts ; gave us a hard time - figure some niche errors from SDK
+- Working with barebones REST Api for Media Valet
+- Working around Click API library Not having a ES Module / NPM Package. Had to work out it's usage in react app
 
 ## Accomplishments that we're proud of
 
-- Our hack is much more than code. Not everyone on our team is a developer and so unlike most of the hacks ours has lesser code. We have resorted to use existing platforms and tooling without reinventing the wheel wherever possible
-- Inspite of several technical challenges our team mates never shied away from reaching out for help. Being extremely introverted some of us happy and proud that others have come out of their shells.
-- Our UI - This time our app interface looks slick and clean, being non-designers, we're definetly patting on each others back for that.
-- Final Presentation Video - Initially we were worried about exceeding the time limit for the presentation. But we are proud that we put our heads together and re-worked on storyboard and got it under time. Someone cat stop beaming :D :D
-- Turning in a submission itself feels like a big accomplishment, honestly we never thought we could come this far. Proud of reaching the finish line.
+- **Our hack is much more than code.** Not everyone on our team is a developer and so unlike most of the hacks ours has lesser code. We have resorted to use existing platforms and tooling without reinventing the wheel wherever possible 🌈
+- Inspite of several technical challenges our team mates **never shied away from reaching out for help.**  Some of us are happy and proud that extremely introverted others have come out of their shells. 🐢 😛
+- **Our UI** - This time our app interface looks slick and clean, being non-designers, we're definetly patting on each others back for that.
+- **Final Presentation Video** - Initially we were worried about exceeding the time limit for the presentation. But we are proud that we put our heads together and re-worked on storyboard and got it under time. Someone can't stop beaming 😊
+- Turning in a submission itself feels like a big accomplishment, honestly we never thought we could come this far. Proud of reaching the finish line. 🏁
 
 ## What we learned
 
 We explored new frontiers in this hack. One of our biggest takeaways was learning about the two mammoth platforms — Esri’s ArcGIS and DocuSign. Both have enormous developer support and extensive documentation. Although it was a bit intimidating at first, once we started going over the docs over the past week or so, we did become familiar with them slowly.
+
+We have played with DocuSign APIs so much, and have an in-depth understanding of how they work, where they behave differently etc. Cos we pushed the API to their limits  by trying to adapt them to unfathomable use-cases and scenarios, exploring every [single method a class possibly offers](https://docusign.github.io/docusign-esign-node-client/module-api_EnvelopesApi.html#deleteRecipient).
 
 Another learning although not related to coding or building was time management and async work. All of us were distributed across time zones and had to work remotely; while managing our day jobs. We had to plan out our entire hack in such a way that we got most stuff done late at night & during weekends. We were constantly in touch through the day, collecting information and brainstorming solutions.
 
