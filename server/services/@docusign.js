@@ -108,6 +108,7 @@ export const generateDocumentPopulatedWithData = async (data) => {
   return document
 }
 
+
 export const applyTemplateToDocument = async (
   { documentId, templateId },
   args,

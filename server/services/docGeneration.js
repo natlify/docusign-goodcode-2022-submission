@@ -38,7 +38,8 @@ export const getRenderedHtml = async (data) => {
           ),
           latitude: survey123Data.geometry.x,
           longitude: survey123Data.geometry.y,
-          areaDeployed: survey123Data.name_of_the_area_deployed,
+          areaDeployed: survey123Data.attributes.name_of_the_area_deployed,
+          camSettings: survey123Data.attributes.camera_settings,
         },
         {},
       )
@@ -50,10 +51,22 @@ export const getRenderedHtml = async (data) => {
       border: "0",
     }
 
-    const buffer = await pdf.create(htmlString, options)
-    return buffer
-    return htmlString
+    const pdfData = await createPDF(htmlString, options)
+
+    return pdfData
   } catch (error) {
     console.log(error)
   }
 }
+
+const createPDF = (html, options) =>
+  new Promise((resolve, reject) => {
+    pdf.create(html, options).toBuffer((err, buffer) => {
+      if (err !== null) {
+        reject(err)
+      } else {
+        resolve(buffer)
+      }
+      return buffer
+    })
+  })

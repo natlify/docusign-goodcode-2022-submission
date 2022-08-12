@@ -35,6 +35,8 @@ export default class eSignController {
         args,
       )
 
+      args.envelopeId = envelopeIdInDraft
+
       /** STEP 3 construct the Document with survery123 & mediaValet Data */
       const CTIMDV_Document = await docusign.generateDocumentPopulatedWithData(
         args.envelopeArgs,
