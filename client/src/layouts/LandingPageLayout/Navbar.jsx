@@ -17,7 +17,11 @@ const Navbar = () => {
         </div>
         <div>
           <div className="flex items-center gap-8">
-            <Link to="https://www.youtube.com/watch?v=3_RdBz3hcGU&t=3s">
+            <Link
+              to={{
+                pathname: "https://www.youtube.com/watch?v=3_RdBz3hcGU&t=3s",
+              }}
+            >
               <a className="mr-4 inline-flex items-center text-xs text-primary md:text-sm">
                 <IconBrandYoutube className="mr-2 h-5 w-5" aria-hidden="true" />
                 <span>Watch Demo</span>
