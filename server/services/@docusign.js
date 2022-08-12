@@ -5,25 +5,25 @@ import { getRenderedHtml } from "./docGeneration.js";
 const ESignBasePath = eSignSdk.ApiClient.RestApi.BasePath.DEMO;
 
 export const createEnvelopeDraft = async (envelopeDefinition, args) => {
-  let eSignApi = new eSignSdk.ApiClient();
-  eSignApi.setBasePath(ESignBasePath);
-  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
-  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
-  let results = null;
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
+  let results = null
 
   try {
     results = await envelopesApi.createEnvelope(args.accountId, {
       envelopeDefinition,
-    });
+    })
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 
-  let envelopeId = results.envelopeId;
-  console.log(`Envelope was created. EnvelopeId ${envelopeId}`);
+  let envelopeId = results.envelopeId
+  console.log(`Envelope was created. EnvelopeId ${envelopeId}`)
 
-  return envelopeId;
-};
+  return envelopeId
+}
 
 /**
  *
@@ -32,29 +32,29 @@ export const createEnvelopeDraft = async (envelopeDefinition, args) => {
  *
  */
 export const addDocumentToEnvelopeDraft = async (document, args) => {
-  let eSignApi = new eSignSdk.ApiClient();
-  eSignApi.setBasePath(ESignBasePath);
-  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
-  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
   let updateResult = await envelopesApi.updateDocuments(
     args.accountId,
     args.envelopeId,
     { envelopeDefinition: { documents: [document] } },
-  );
-  return updateResult;
-};
+  )
+  return updateResult
+}
 
 export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
-  let envlp = new eSignSdk.EnvelopeDefinition();
-  envlp.templateId = process.env.DS_SENTINELS_TEMPLATE;
-  envlp.brandId = envelopeArgs.brandId;
+  let envlp = new eSignSdk.EnvelopeDefinition()
+  envlp.templateId = process.env.DS_SENTINELS_TEMPLATE
+  envlp.brandId = envelopeArgs.brandId
 
-  const { recipients, mediaValetData, survey123Data } = envelopeArgs;
+  const { recipients, mediaValetData, survey123Data } = envelopeArgs
 
-  let firstVerifier = new eSignSdk.TemplateRole();
-  firstVerifier.email = recipients.signerEmail;
-  firstVerifier.name = recipients.signerFullName;
-  firstVerifier.roleName = ROLE_NAMES.VERIFIER;
+  let firstVerifier = new eSignSdk.TemplateRole()
+  firstVerifier.email = recipients.signerEmail
+  firstVerifier.name = recipients.signerFullName
+  firstVerifier.roleName = ROLE_NAMES.VERIFIER
 
   /** Constructing Additional Reviewers in Case Of Sensitive Data */
   const additionalReviewers = recipients.reviewers.map(
@@ -64,7 +64,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
         name,
         roleName: `Reviewer L${index + 1}`, // Rolenames for reviewers follow the pattern L1, L2 etc.
       }),
-  );
+  )
 
   envlp.customFields = {
     textCustomFields: [
@@ -89,33 +89,33 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
         value: envelopeArgs.isSensitive ? "Yes" : "No",
       },
     ],
-  };
+  }
 
-  envlp.templateRoles = [firstVerifier, ...additionalReviewers];
+  envlp.templateRoles = [firstVerifier, ...additionalReviewers]
 
-  envlp.status = "created";
+  envlp.status = "created"
 
-  return envlp;
-};
+  return envlp
+}
 
 export const generateDocumentPopulatedWithData = async (data) => {
-  const htmlDocumentData = await getRenderedHtml(data);
-  let document = new eSignSdk.Document();
-  document.documentBase64 = Buffer.from(htmlDocumentData).toString("base64");
-  document.name = "Verification Document";
-  document.fileExtension = "html";
-  document.documentId = "2";
-  return document;
-};
+  const htmlDocumentData = await getRenderedHtml(data)
+  let document = new eSignSdk.Document()
+  document.documentBase64 = Buffer.from(htmlDocumentData).toString("base64")
+  document.name = "Verification Document"
+  document.fileExtension = "html"
+  document.documentId = "2"
+  return document
+}
 
 export const applyTemplateToDocument = async (
   { documentId, templateId },
   args,
 ) => {
-  let eSignApi = new eSignSdk.ApiClient();
-  eSignApi.setBasePath(ESignBasePath);
-  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
-  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
   let applyResult = await envelopesApi.applyTemplateToDocument(
     args.accountId,
     args.envelopeId,
@@ -132,36 +132,39 @@ export const applyTemplateToDocument = async (
         ],
       },
     },
-  );
-  return applyResult;
-};
+  )
+  return applyResult
+}
 
 export const sendEnvelope = async (args) => {
-  let eSignApi = new eSignSdk.ApiClient();
-  eSignApi.setBasePath(ESignBasePath);
-  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
-  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
   const sentResult = await envelopesApi.update(
     args.accountId,
     args.envelopeId,
     {
       envelope: {
         status: "sent",
-        workflow: {
-          workflowSteps: [
-            {
-              action: "pause_before",
-              description: "pause_before routing order 2",
-              itemId: 2,
-              triggerOnItem: "routing_order",
-            },
-          ],
-        },
       },
     },
-  );
-  return sentResult;
-};
+  )
+  return sentResult
+}
+
+export const removeRecipient = async (args, recipientId) => {
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
+  const removeResult = await envelopesApi.deleteRecipient(
+    args.accountId,
+    args.envelopeId,
+    recipientId,
+  )
+  return removeResult
+}
 
 export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
   let eSignApi = new eSignSdk.ApiClient();
