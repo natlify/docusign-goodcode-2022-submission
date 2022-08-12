@@ -35,20 +35,10 @@ export default class eSignController {
         args,
       )
 
-      args.envelopeId = envelopeIdInDraft
-      let totalNumberOfReviewers = 4
-      let toRemove =
-        totalNumberOfReviewers - args.envelopeArgs.recipients.reviewers.length
-      while (toRemove > 1) {
-        await docusign.removeRecipient(args, totalNumberOfReviewers--)
-        toRemove--
-      }
-
       /** STEP 3 construct the Document with survery123 & mediaValet Data */
       const CTIMDV_Document = await docusign.generateDocumentPopulatedWithData(
         args.envelopeArgs,
       )
-
       /** STEP 4 amend the draft envelope and add new document + apply our template */
       await docusign.addDocumentToEnvelopeDraft(CTIMDV_Document, args)
 
@@ -59,6 +49,15 @@ export default class eSignController {
       //   },
       //   args,
       // )
+
+      args.envelopeId = envelopeIdInDraft
+      let totalNumberOfReviewers = 4
+      let toRemove =
+        totalNumberOfReviewers - args.envelopeArgs.recipients.reviewers.length
+      while (toRemove > 1) {
+        await docusign.removeRecipient(args, totalNumberOfReviewers--)
+        toRemove--
+      }
 
       /** STEP 5 Send the Envelope */
       const data = await docusign.sendEnvelope(args)

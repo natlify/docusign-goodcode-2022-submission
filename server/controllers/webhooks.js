@@ -65,10 +65,10 @@ export default class webHooksController {
         await updateAttributes({
           assetId,
           token: bearer_token,
-          lat: 96.8888,
-          long: 12.6666666,
+          lat: -6.823193,
+          long: 39.250878,
           isSensitive: false,
-        });
+        })
         return { customDataAsObj };
       } catch (error) {
         throw new Error(error.message);

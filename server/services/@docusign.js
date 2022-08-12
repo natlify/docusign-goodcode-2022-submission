@@ -103,7 +103,7 @@ export const generateDocumentPopulatedWithData = async (data) => {
   let document = new eSignSdk.Document()
   document.documentBase64 = Buffer.from(htmlDocumentData).toString("base64")
   document.name = "Verification Document"
-  document.fileExtension = "html"
+  document.fileExtension = "pdf"
   document.documentId = "2"
   return document
 }
