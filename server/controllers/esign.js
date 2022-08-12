@@ -1,17 +1,18 @@
 import * as docusign from "../services/@docusign.js";
 import { checkToken } from "./docusignJWTAuth.js";
-import eSign from "docusign-esign";
+import eSign from "docusign-esign"
 
-const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO;
+const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO
+const backendBaseURL = process.env.BACKEND_URL
 export default class eSignController {
   static createEnvelopeForSigning = async (req) => {
-    await checkToken(req);
-    const { body } = req;
+    await checkToken(req)
+    const { body } = req
 
     const envelopeArgs = {
       ...body,
-      redirectUrl: "http://localhost:3000/app/successful-verification",
-      healthCheckEndPoint: "http://localhost:3000",
+      redirectUrl: `${backendBaseURL}/app/successful-verification`,
+      healthCheckEndPoint: `${backendBaseURL}/api`,
     }
 
     envelopeArgs.brandId = process.env.DS_BRAND_ID
@@ -35,6 +36,8 @@ export default class eSignController {
         args,
       )
 
+      args.envelopeId = envelopeIdInDraft
+
       /** STEP 3 construct the Document with survery123 & mediaValet Data */
       const CTIMDV_Document = await docusign.generateDocumentPopulatedWithData(
         args.envelopeArgs,
@@ -50,6 +53,11 @@ export default class eSignController {
       //   args,
       // )
 
+      /** STEP 5 Set Envelope Tab values and Document Custom Field Values  */
+      await docusign.updateTabsAndCustomFields(args)
+
+      /** STEP 6 Remove unnecessary recipients */
+
       args.envelopeId = envelopeIdInDraft
       let totalNumberOfReviewers = 4
       let toRemove =
@@ -59,11 +67,10 @@ export default class eSignController {
         toRemove--
       }
 
-      /** STEP 5 Send the Envelope */
-      const data = await docusign.sendEnvelope(args)
-      console.log(data)
+      /** STEP 7 Send the Envelope */
+      await docusign.sendEnvelope(args)
 
-      /** STEP 6 Generate URL for embedded signing */
+      /** STEP 8 Generate URL for embedded signing */
       const embeddedSigningURL = await docusign.getEmbeddedRecipientViewUrl(
         envelopeIdInDraft,
         args,
@@ -74,10 +81,19 @@ export default class eSignController {
         redirectUrl: embeddedSigningURL,
       }
     } catch (error) {
-      console.log(error)
       throw new Error(error.message)
     }
 
-    return results;
-  };
+    return results
+  }
+
+  static testESign = async (req) => {
+    await checkToken(req)
+
+    try {
+      /** No Empty */
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 }

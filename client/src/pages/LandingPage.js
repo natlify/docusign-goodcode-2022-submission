@@ -24,7 +24,7 @@ const LandingPage = () => {
                     <div>
                       <div>
                         <a
-                          to="https://docusign2022.devpost.com/"
+                          href="https://docusign2022.devpost.com/"
                           rel="nofollow noreferrer"
                           target="_blank"
                           className="inline-flex space-x-4"
@@ -34,7 +34,7 @@ const LandingPage = () => {
                           </span>
                         </a>
                         <a
-                          to="https://docusign2022.devpost.com/"
+                          href="https://docusign2022.devpost.com/"
                           rel="nofollow noreferrer"
                           target="_blank"
                           className="mx-2 inline-flex space-x-4"
@@ -69,7 +69,11 @@ const LandingPage = () => {
                           className="border border-transparent shadow-sm transition-all
                             duration-150 group-hover:-translate-y-0.5 group-hover:shadow-lg
                             sm:w-auto"
-                          to="https://github.com/hbthck/docusign-goodcode-2022-submission"
+                          to={{
+                            pathname:
+                              "https://github.com/hbthck/docusign-goodcode-2022-submission",
+                          }}
+                          target="_blank"
                         >
                           <a
                             target="_blank"

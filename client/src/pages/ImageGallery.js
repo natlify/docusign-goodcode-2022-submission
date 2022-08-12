@@ -13,7 +13,6 @@ const ImageGallery = () => {
   const isLoading = useSelector(
     (root) => root.loading.effects.ctImages.fetchDataFromSources,
   )
-  const showDocuSignClick = useSelector((root) => !root.user.acceptedClick)
   const handleVerifyFlow = async (
     imageData,
     isSensitive = false,
@@ -39,69 +38,6 @@ const ImageGallery = () => {
       ),
     })
 
-  useEffect(() => {
-    // eslint-disable-next-line no-undef
-    docuSignClick.Clickwrap.render(
-      {
-        environment: "https://demo.docusign.net",
-        accountId: "77c8b115-51ee-4f06-9979-ca9e73968e8e",
-        clickwrapId: "a2a6a91f-131e-4d48-b15a-0bb7bfdd0d96",
-        clientUserId: "ZAP_WEB_CLIENT_996",
-        documentData: {
-          fullName: "Arjith",
-          email: "arjith496@gmail.com",
-          company: "Zapene.app",
-          title: "CTO",
-        },
-      },
-      "#ds-clickwrap",
-    )
-  }, [])
-
-  // useEffect(() => {
-  //   const sleep = async () => {
-  //     let sec
-  //     sec = 10
-  //     await new Promise((resolve) => setTimeout(resolve, sec * 1000))
-  //     showNotification({
-  //       title: "Document Verified & Signed",
-  //       message: "arjith@thinkjs.club verified your correction for IMG_0211",
-  //       icon: <IconFilePencil size={15} />,
-  //       color: "green",
-  //       autoClose: false,
-  //     })
-  //     sec = 8
-  //     await new Promise((resolve) => setTimeout(resolve, sec * 1000))
-  //     showNotification({
-  //       title: "Document Verified & Signed",
-  //       message: "arjith@thinkjs.club verified your correction for IMG_0211",
-  //       icon: <IconFilePencil size={15} />,
-  //       color: "green",
-  //       autoClose: false,
-  //     })
-  //     sec = 12
-  //     await new Promise((resolve) => setTimeout(resolve, sec * 1000))
-  //     showNotification({
-  //       title: "Document Verified & Signed",
-  //       message: "arjith496@gmail.com verified your correction for IMG_0211",
-  //       icon: <IconFilePencil size={15} />,
-  //       color: "green",
-  //       autoClose: false,
-  //     })
-  //     sec = 12
-  //     await new Promise((resolve) => setTimeout(resolve, sec * 1000))
-  //     showNotification({
-  //       title: "Document Verified & Signed",
-  //       message:
-  //         "jayantha.natarajan@gmail.com verified your correction for IMG_0211",
-  //       icon: <IconFilePencil size={15} />,
-  //       color: "green",
-  //       autoClose: false,
-  //     })
-  //   }
-  //   sleep()
-  // }, [])
-
   const items = imageData.map((item, index) => (
     <ImageCard
       key={item.id}
@@ -119,11 +55,7 @@ const ImageGallery = () => {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        // setTasks(data);
-        await dispatch.ctImages.fetchDataFromSources({
-          folderId: "7d256341-06e2-4f2b-8d29-0d4ffc1856f5",
-        })
-        // throw new Error("Sample Error Message");
+        await dispatch.ctImages.fetchDataFromSources()
       } catch (error) {
         showNotification({
           title: "Something went wrong!",

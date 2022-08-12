@@ -8,8 +8,8 @@ import models from "../models";
 const persistConfig = {
   key: "neverGonnaGiveYouUp!",
   storage,
-  whitelist: ["count", "user", "contacts"],
-};
+  whitelist: ["user", "contacts", "settings"],
+}
 const store = init({
   models,
   plugins: [loadingPlugin(), selectPlugin(), persistPlugin(persistConfig)],

@@ -10,6 +10,7 @@ export default class webHooksController {
   static handleDocusignConnectEvents = async (req) => {
     const { body } = req;
     const { data, event, bearer_token } = body;
+    console.log(JSON.stringify(data, null, 4))
     if (event === "envelope-completed") {
       await supabase
         .from("camera_trap_assets")
@@ -40,37 +41,39 @@ export default class webHooksController {
           assetId,
           token: bearer_token,
           altText: metaDataAsObj["z-alt-text"],
-        });
+        })
 
         const originalKeyWords = tabs.textTabs
           .filter((ele) => ele.tabLabel === "z-keywords-text")[0]
           .originalValue.split(",")
-          .map((str) => str.trim());
+          .map((str) => str.trim())
         const newKeyWords = metaDataAsObj["z-keywords-text"]
           .split(",")
-          .map((str) => str.trim());
+          .map((str) => str.trim())
         const difference = newKeyWords.filter(
           (x) => !originalKeyWords.includes(x),
-        ); // to add
-        // const complement = originalKeyWords.filter(
-        //   (x) => !newKeyWords.includes(x),
-        // ); // to remove
+        ) // to add
+        // eslint-disable-next-line no-unused-vars
+        const complement = originalKeyWords.filter(
+          (x) => !newKeyWords.includes(x),
+        ) // to remove
 
         await addKeyWords({
           token: bearer_token,
           assetId,
           keyWordList: difference,
-        });
+        })
 
         await updateAttributes({
           assetId,
           token: bearer_token,
-          lat: -6.823193,
-          long: 39.250878,
+          lat: customDataAsObj.latitude,
+          long: customDataAsObj.longitude,
           isSensitive: false,
         })
-        return { customDataAsObj };
+        return { customDataAsObj }
       } catch (error) {
+        console.log(JSON.stringify(error, null, 4))
         throw new Error(error.message);
       }
     }
