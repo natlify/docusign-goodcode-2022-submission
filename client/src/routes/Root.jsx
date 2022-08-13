@@ -13,33 +13,52 @@ import Contacts from "../pages/Contacts"
 import Schedule from "../pages/Schedule"
 import DocuSignEvents from "../pages/DocuSignEvents";
 import Auth from "../pages/Auth";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { supabase } from "../utils/supabase"
 import SignOut from "../pages/SignOut"
+import RequireAuth from "./RequireAuth"
+import OnlyGuest from "./OnlyGuest"
 
 const Root = () => {
   const dispatch = useDispatch()
+  const user = useSelector((root) => root.user)
   useEffect(() => {
     dispatch.user.initAuth()
     supabase.auth.onAuthStateChange(() => {
       dispatch.user.initAuth()
     })
   }, [])
+  useEffect(() => {
+    dispatch.user.setServerCookie()
+  }, [user])
 
   return (
     <Routes>
-      <Route index element={<LandingPage />} />
+      <Route
+        index
+        element={
+          <OnlyGuest>
+            <LandingPage />
+          </OnlyGuest>
+        }
+      />
       <Route path="auth" element={<Auth />} />
       <Route path="auth/logout" element={<SignOut />} />
-      <Route path="app" element={<AppLayout />}>
+      <Route
+        path="app"
+        element={
+          <RequireAuth>
+            <AppLayout />
+          </RequireAuth>
+        }
+      >
         <Route index element={<ImageGallery />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="schedules" element={<Schedule />} />
         <Route path="contacts" element={<Contacts />} />
         <Route path="admin-iam" element={<Identity />} />
-        <Route path="settings" element={<Settings />} />
         <Route path="settings" element={<Settings />} />
         <Route path="successful-verification" element={<DocuSignEvents />} />
         <Route path="*" element={<UserErrorPage />} />
