@@ -112,9 +112,9 @@ export default function SideNavbarMinimal() {
             label="Change account"
             to="app/switch-accounts"
           />
-          <NavbarLink icon={IconLogout} label="Logout" to="auth/logout" />
+          <NavbarLink icon={IconLogout} label="Logout" to="/auth/logout" />
         </Stack>
       </Navbar.Section>
     </Navbar>
-  );
+  )
 }

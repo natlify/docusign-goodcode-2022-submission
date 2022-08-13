@@ -13,27 +13,40 @@ import Contacts from "../pages/Contacts"
 import Schedule from "../pages/Schedule"
 import DocuSignEvents from "../pages/DocuSignEvents";
 import Auth from "../pages/Auth";
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { supabase } from "../utils/supabase"
+import SignOut from "../pages/SignOut"
 
 const Root = () => {
-    return (
-      <Routes>
-        <Route index element={<LandingPage />} />
-        <Route path="auth" element={<Auth />} />
-        <Route path="app" element={<AppLayout />}>
-          <Route index element={<ImageGallery />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="schedules" element={<Schedule />} />
-          <Route path="contacts" element={<Contacts />} />
-          <Route path="admin-iam" element={<Identity />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="successful-verification" element={<DocuSignEvents />} />
-          <Route path="*" element={<UserErrorPage />} />
-        </Route>
-        <Route path="*" element={<GuestOrApiErrorPage />} />
-      </Routes>
-    );
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch.user.initAuth()
+    supabase.auth.onAuthStateChange(() => {
+      dispatch.user.initAuth()
+    })
+  }, [])
+
+  return (
+    <Routes>
+      <Route index element={<LandingPage />} />
+      <Route path="auth" element={<Auth />} />
+      <Route path="auth/logout" element={<SignOut />} />
+      <Route path="app" element={<AppLayout />}>
+        <Route index element={<ImageGallery />} />
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="schedules" element={<Schedule />} />
+        <Route path="contacts" element={<Contacts />} />
+        <Route path="admin-iam" element={<Identity />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="successful-verification" element={<DocuSignEvents />} />
+        <Route path="*" element={<UserErrorPage />} />
+      </Route>
+      <Route path="*" element={<GuestOrApiErrorPage />} />
+    </Routes>
+  )
 }
 
 export default Root
