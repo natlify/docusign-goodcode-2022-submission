@@ -13,7 +13,7 @@ const useStyles = createStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-end",
     alignItems: "flex-start",
-    paddingBottom: theme.spacing.xl * 6,
+    paddingBottom: theme.spacing.xl * 2,
     zIndex: 1,
     position: "relative",
 
@@ -57,7 +57,7 @@ const useStyles = createStyles((theme) => ({
       width: "100%",
     },
   },
-}));
+}))
 
 export function PageLayout({ pageTitle, pageDesc, children }) {
   const { classes } = useStyles();

@@ -1,6 +1,6 @@
 import { Container, Stack } from "@mantine/core";
-import SensitiveModal from "../components/SensitiveModal";
-import { PageLayout } from "../layouts/PageLayout";
+import MyMap from "../components/MyMap"
+import { PageLayout } from "../layouts/PageLayout"
 
 const Analytics = () => {
   return (
@@ -14,12 +14,16 @@ const Analytics = () => {
           style={{
             width: 800,
           }}
+          spacing={0}
         >
           <p>[WIP : Not added in final submission due to lack of time] </p>
           <p>[This Page is not for evaluation]</p>
         </Stack>
+        <Stack>
+          <MyMap />
+        </Stack>
       </PageLayout>
     </Container>
   )
-};
+}
 export default Analytics;
