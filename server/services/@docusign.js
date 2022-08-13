@@ -1,8 +1,8 @@
 import eSignSdk from "docusign-esign";
 import { ROLE_NAMES } from "../utils/contants.js";
 import { getRenderedHtml } from "./docGeneration.js";
-
-const ESignBasePath = eSignSdk.ApiClient.RestApi.BasePath.DEMO;
+import _ from "lodash"
+const ESignBasePath = eSignSdk.ApiClient.RestApi.BasePath.DEMO
 
 export const createEnvelopeDraft = async (envelopeDefinition, args) => {
   let eSignApi = new eSignSdk.ApiClient()
@@ -108,7 +108,6 @@ export const generateDocumentPopulatedWithData = async (data) => {
   return document
 }
 
-
 export const applyTemplateToDocument = async (
   { documentId, templateId },
   args,
@@ -168,10 +167,10 @@ export const removeRecipient = async (args, recipientId) => {
 }
 
 export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
-  let eSignApi = new eSignSdk.ApiClient();
-  eSignApi.setBasePath(ESignBasePath);
-  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken);
-  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi);
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(ESignBasePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
 
   // Create the recipient view request object
   const viewRequest = new eSignSdk.RecipientViewRequest.constructFromObject({
@@ -183,7 +182,7 @@ export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
     email: args.envelopeArgs.recipients.signerEmail,
     pingFrequency: "500",
     pingUrl: args.envelopeArgs.healthCheckEndPoint,
-  });
+  })
 
   // Call the CreateRecipientView API
   // Exceptions will be caught by the calling function
@@ -193,7 +192,85 @@ export const getEmbeddedRecipientViewUrl = async (envelopeId, args) => {
     {
       recipientViewRequest: viewRequest,
     },
-  );
+  )
 
-  return recipientView.url;
-};
+  return recipientView.url
+}
+
+export const updateTabsAndCustomFields = async (args) => {
+  let eSignApi = new eSignSdk.ApiClient()
+  eSignApi.setBasePath(args.basePath)
+  eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+  let envelopesApi = new eSignSdk.EnvelopesApi(eSignApi)
+
+  const {
+    envelopeArgs: { mediaValetData, survey123Data },
+  } = args
+
+  /** SET Lat long as custom field Values */
+  await envelopesApi.createCustomFields(args.accountId, args.envelopeId, {
+    customFields: {
+      textCustomFields: [
+        {
+          name: "latitude",
+          show: true,
+          value: survey123Data.geometry.x,
+        },
+        {
+          name: "longitude",
+          show: true,
+          value: survey123Data.geometry.y,
+        },
+      ],
+    },
+  })
+
+  const results = await envelopesApi.getDocumentTabs(
+    args.accountId,
+    args.envelopeId,
+    "2",
+  )
+  const textTabObj = _.keyBy(results.textTabs, "tabLabel")
+  const numTabObj = _.keyBy(results.numberTabs, "tabLabel")
+  const dropdownTabObj = _.keyBy(results.listTabs, "tabLabel")
+
+  const updateAttemptResult = await envelopesApi.updateTabs(
+    args.accountId,
+    args.envelopeId,
+    textTabObj["z-keywords-text"].recipientId,
+    {
+      tabs: {
+        numberTabs: [
+          {
+            ...numTabObj["z-camheight-text"],
+            value: survey123Data.attributes.camera_height_cm,
+          },
+        ],
+        textTabs: [
+          {
+            ...textTabObj["z-keywords-text"],
+            value: mediaValetData.file.keywords,
+          },
+          {
+            ...textTabObj["z-cognitive-data"],
+            value: "Animals, Computer, Wildlife, Macaque, Outdoor", // TODO : Fetch from the media valet details data
+          },
+          {
+            ...textTabObj["z-alt-text"],
+            value: mediaValetData.altText,
+          },
+        ],
+        listTabs: [
+          {
+            ...dropdownTabObj["z-camera-dropdown"],
+            listSelectedValue: survey123Data.attributes.camera_make,
+          },
+          {
+            ...dropdownTabObj["z-camattached-dropdown"],
+            listSelectedValue: survey123Data.attributes.camera_attached_to,
+          },
+        ],
+      },
+    },
+  )
+}

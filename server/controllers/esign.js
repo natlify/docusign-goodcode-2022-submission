@@ -1,7 +1,6 @@
 import * as docusign from "../services/@docusign.js";
 import { checkToken } from "./docusignJWTAuth.js";
-import eSign from "docusign-esign";
-import _ from "lodash"
+import eSign from "docusign-esign"
 
 const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO
 export default class eSignController {
@@ -53,6 +52,11 @@ export default class eSignController {
       //   args,
       // )
 
+      /** STEP 5 Set Envelope Tab values and Document Custom Field Values  */
+      await docusign.updateTabsAndCustomFields(args)
+
+      /** STEP 6 Remove unnecessary recipients */
+
       args.envelopeId = envelopeIdInDraft
       let totalNumberOfReviewers = 4
       let toRemove =
@@ -62,11 +66,10 @@ export default class eSignController {
         toRemove--
       }
 
-      /** STEP 5 Send the Envelope */
-      const data = await docusign.sendEnvelope(args)
-      console.log(data)
+      /** STEP 7 Send the Envelope */
+      await docusign.sendEnvelope(args)
 
-      /** STEP 6 Generate URL for embedded signing */
+      /** STEP 8 Generate URL for embedded signing */
       const embeddedSigningURL = await docusign.getEmbeddedRecipientViewUrl(
         envelopeIdInDraft,
         args,
@@ -86,74 +89,13 @@ export default class eSignController {
 
   static testESign = async (req) => {
     await checkToken(req)
-    const { body } = req
-
-    const args = {
-      accessToken: req.session.docuSignAccessToken,
-      basePath: docuSignBasePath,
-      accountId: process.env.DS_API_ACCOUNT_ID,
-      envelopeId: "e2f5eddc-b89d-4c7a-a26c-f340ca55a6cf",
-    }
 
     try {
-      let eSignApi = new eSign.ApiClient()
-      eSignApi.setBasePath(args.basePath)
-      eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
-      let envelopesApi = new eSign.EnvelopesApi(eSignApi)
-      const results = await envelopesApi.getDocumentTabs(
-        args.accountId,
-        args.envelopeId,
-        "2",
-      )
-      const textTabObj = _.keyBy(results.textTabs, "tabLabel")
-      const numTabObj = _.keyBy(results.numberTabs, "tabLabel")
-      const dropdownTabObj = _.keyBy(results.listTabs, "tabLabel")
-
-      const updateAttemptResult = await envelopesApi.updateTabs(
-        args.accountId,
-        args.envelopeId,
-        textTabObj["z-keywords-text"].recipientId,
-        {
-          tabs: {
-            numberTabs: [
-              {
-                ...numTabObj["z-camheight-text"],
-                value: 200,
-              },
-            ],
-            textTabs: [
-              {
-                ...textTabObj["z-keywords-text"],
-                value: "Foo, Bar",
-              },
-              {
-                ...textTabObj["z-cognitive-data"],
-                value: "Foo, Bar",
-              },
-              {
-                ...textTabObj["z-alt-text"],
-                value: "Foo, Bar",
-              },
-            ],
-            listTabs: [
-              {
-                ...dropdownTabObj["z-camera-dropdown"],
-                listSelectedValue: "Browning",
-              },
-              {
-                ...dropdownTabObj["z-camattached-dropdown"],
-                listSelectedValue: "Post",
-              },
-            ],
-          },
-        },
-      )
-
-      const updatedResults = await envelopesApi.getFormData(
-        args.accountId,
-        args.envelopeId,
-      )
-      return updatedResults
+      // const updatedResults = await envelopesApi.getFormData(
+      //   args.accountId,
+      //   args.envelopeId,
+      // )
+      // return updatedResults
     } catch (error) {
       console.log(error)
       throw new Error(error)
