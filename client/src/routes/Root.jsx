@@ -49,7 +49,6 @@ const Root = () => {
         .from("profile")
         .update({ accepted_cp: true })
         .match({ id: user.id })
-        .then((data) => console.log(data))
     }
   }, [user])
 

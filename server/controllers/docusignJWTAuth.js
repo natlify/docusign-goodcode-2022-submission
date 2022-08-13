@@ -67,8 +67,7 @@ export const checkToken = async (req) => {
 
     // Update the token if needed
     if (needToken) {
-      console.log("refreshing");
-      await getToken(req);
+      await getToken(req)
     }
   } catch (error) {
     if (
@@ -152,8 +151,7 @@ export const login = async (req, res, next) => {
  * Logs the user out by destroying the session.
  */
 export const logout = (req, res) => {
-  req.session = null;
-  console.log("Successfully logged out!");
+  req.session = null
   res.status(200).send("Success: you have logged out");
 };
 

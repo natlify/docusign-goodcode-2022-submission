@@ -80,7 +80,6 @@ export default class eSignController {
         redirectUrl: embeddedSigningURL,
       }
     } catch (error) {
-      console.log(error)
       throw new Error(error.message)
     }
 
@@ -97,7 +96,6 @@ export default class eSignController {
       // )
       // return updatedResults
     } catch (error) {
-      console.log(error)
       throw new Error(error)
     }
   }
