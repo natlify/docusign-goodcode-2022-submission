@@ -16,7 +16,8 @@ export const ctImages = {
     },
   },
   effects: (dispatch) => ({
-    async fetchDataFromSources({ folderId }, rootState) {
+    async fetchDataFromSources(payload, rootState) {
+      const folderId = rootState.settings.mediaValetDirectoryID
       const responseData = await Api.get(
         `/media-valet/folder/${folderId}/assets`,
       )

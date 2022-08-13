@@ -55,9 +55,7 @@ const ImageGallery = () => {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        await dispatch.ctImages.fetchDataFromSources({
-          folderId: "7d256341-06e2-4f2b-8d29-0d4ffc1856f5",
-        })
+        await dispatch.ctImages.fetchDataFromSources()
       } catch (error) {
         showNotification({
           title: "Something went wrong!",

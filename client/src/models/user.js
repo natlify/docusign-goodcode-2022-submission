@@ -8,6 +8,9 @@ export const user = {
     setUser(state, payload) {
       return payload
     },
+    setValue(state, { key, value }) {
+      return { ...state, [key]: value }
+    },
   },
   selectors: (slice) => ({
     isAuthed() {
@@ -39,6 +42,14 @@ export const user = {
         event: rootState.user?.email ? "SIGNED_IN" : "SIGNED_OUT",
         session: supabase.auth.session(),
       })
+    },
+
+    async updateFullName(payload, rootState) {
+      dispatch.user.setValue({ key: "full_name", value: payload })
+      await supabase
+        .from("profile")
+        .update({ full_name: payload })
+        .match({ id: rootState.user.id })
     },
   }),
 }

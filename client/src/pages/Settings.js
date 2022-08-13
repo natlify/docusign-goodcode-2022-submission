@@ -13,11 +13,29 @@ import {
   Title,
 } from "@mantine/core"
 import { Card, Switch } from "@mantine/core"
+import { showNotification } from "@mantine/notifications"
 
-import { IconFolder } from "@tabler/icons"
+import { IconCheck, IconFolder } from "@tabler/icons"
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { PageLayout } from "../layouts/PageLayout"
 
 const Settings = () => {
+  const dispatch = useDispatch()
+  const user = useSelector((root) => root.user)
+  const settings = useSelector((root) => root.settings)
+  const [fname, setfname] = useState(user.full_name)
+  const [mvDirectory, setMvDirectory] = useState(settings.mediaValetDirectoryID)
+  const [approverName, setApproveName] = useState(settings.approver.name)
+  const [approverEmail, setApproveEmail] = useState(settings.approver.email)
+  const done = () => {
+    showNotification({
+      title: "Updated",
+      message: "Value was saved successfully",
+      icon: <IconCheck size={15} />,
+      color: "green",
+    })
+  }
   return (
     <Container>
       <PageLayout
@@ -37,7 +55,10 @@ const Settings = () => {
               </Text>
               <Grid grow>
                 <Grid.Col span={1}>
-                  <TextInput></TextInput>
+                  <TextInput
+                    value={fname}
+                    onChange={(event) => setfname(event.target.value)}
+                  ></TextInput>
                   <Text size={"xs"} color="gray">
                     Your name may appear around Zapene wherever you contribute
                     or are mentioned. Helps to identify you easily. You can
@@ -45,7 +66,14 @@ const Settings = () => {
                   </Text>
                 </Grid.Col>
                 <Grid.Col span={1}>
-                  <Button>Update</Button>
+                  <Button
+                    onClick={() => {
+                      done()
+                      dispatch.user.updateFullName(fname)
+                    }}
+                  >
+                    Update
+                  </Button>
                 </Grid.Col>
               </Grid>
             </Stack>
@@ -66,7 +94,11 @@ const Settings = () => {
               </Group>
               <Grid grow>
                 <Grid.Col span={2}>
-                  <TextInput icon={<IconFolder size={18} stroke={1.5} />} />
+                  <TextInput
+                    value={mvDirectory}
+                    onChange={(event) => setMvDirectory(event.target.value)}
+                    icon={<IconFolder size={18} stroke={1.5} />}
+                  />
                   <Text size={"xs"} color="gray">
                     Set this value to easily switch between any folders on Media
                     Valet. Easily test multiple scenarios and validate
@@ -74,7 +106,18 @@ const Settings = () => {
                   </Text>
                 </Grid.Col>
                 <Grid.Col span={1}>
-                  <Button color={"gray"}>Save</Button>
+                  <Button
+                    onClick={() => {
+                      done()
+                      dispatch.settings.setValue({
+                        key: "mediaValetDirectoryID",
+                        value: mvDirectory,
+                      })
+                    }}
+                    color={"gray"}
+                  >
+                    Save
+                  </Button>
                 </Grid.Col>
               </Grid>
             </Stack>
@@ -100,16 +143,32 @@ const Settings = () => {
               create the portal account
             </Text>
             <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
-              <TextInput label="Approver name" placeholder="Enter name" />
+              <TextInput
+                label="Approver name"
+                placeholder="Enter name"
+                value={approverName}
+                onChange={(event) => setApproveName(event.target.value)}
+              />
               <TextInput
                 label="Approver email"
                 placeholder="hello@zapene.app"
                 required
+                value={approverEmail}
+                onChange={(event) => setApproveEmail(event.target.value)}
               />
             </SimpleGrid>
             <Group>
-              {" "}
-              <Button>Update Approver</Button>
+              <Button
+                onClick={() => {
+                  done()
+                  dispatch.settings.setValue({
+                    key: "approver",
+                    value: { name: approverName, email: approverEmail },
+                  })
+                }}
+              >
+                Update Approver
+              </Button>
             </Group>
           </Stack>
         </Stack>
