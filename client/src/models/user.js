@@ -19,7 +19,6 @@ export const user = {
     async initAuth() {
       const sessionUser = supabase.auth.user()
       if (sessionUser) {
-        console.log("Initializing Auth")
         const { data: profile } = await supabase
           .from("profile")
           .select("*")
@@ -38,7 +37,7 @@ export const user = {
 
     async setServerCookie(payload, rootState) {
       axios.post("/api/auth/set-supabase-cookie", {
-        event: rootState.user.email ? "SIGNED_IN" : "SIGNED_OUT",
+        event: rootState.user?.email ? "SIGNED_IN" : "SIGNED_OUT",
         session: supabase.auth.session(),
       })
     },
