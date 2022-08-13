@@ -234,43 +234,43 @@ export const updateTabsAndCustomFields = async (args) => {
   const numTabObj = _.keyBy(results.numberTabs, "tabLabel")
   const dropdownTabObj = _.keyBy(results.listTabs, "tabLabel")
 
-  const updateAttemptResult = await envelopesApi.updateTabs(
-    args.accountId,
-    args.envelopeId,
-    textTabObj["z-keywords-text"].recipientId,
-    {
-      tabs: {
-        numberTabs: [
-          {
-            ...numTabObj["z-camheight-text"],
-            value: survey123Data.attributes.camera_height_cm,
-          },
-        ],
-        textTabs: [
-          {
-            ...textTabObj["z-keywords-text"],
-            value: mediaValetData.file.keywords,
-          },
-          {
-            ...textTabObj["z-cognitive-data"],
-            value: "Animals, Computer, Wildlife, Macaque, Outdoor", // TODO : Fetch from the media valet details data
-          },
-          {
-            ...textTabObj["z-alt-text"],
-            value: mediaValetData.altText,
-          },
-        ],
-        listTabs: [
-          {
-            ...dropdownTabObj["z-camera-dropdown"],
-            listSelectedValue: survey123Data.attributes.camera_make,
-          },
-          {
-            ...dropdownTabObj["z-camattached-dropdown"],
-            listSelectedValue: survey123Data.attributes.camera_attached_to,
-          },
-        ],
-      },
-    },
-  )
+   await envelopesApi.updateTabs(
+     args.accountId,
+     args.envelopeId,
+     textTabObj["z-keywords-text"].recipientId,
+     {
+       tabs: {
+         numberTabs: [
+           {
+             ...numTabObj["z-camheight-text"],
+             value: survey123Data.attributes.camera_height_cm,
+           },
+         ],
+         textTabs: [
+           {
+             ...textTabObj["z-keywords-text"],
+             value: mediaValetData.file.keywords,
+           },
+           {
+             ...textTabObj["z-cognitive-data"],
+             value: "Animals, Computer, Wildlife, Macaque, Outdoor", // TODO : Fetch from the media valet details data
+           },
+           {
+             ...textTabObj["z-alt-text"],
+             value: mediaValetData.altText,
+           },
+         ],
+         listTabs: [
+           {
+             ...dropdownTabObj["z-camera-dropdown"],
+             listSelectedValue: survey123Data.attributes.camera_make,
+           },
+           {
+             ...dropdownTabObj["z-camattached-dropdown"],
+             listSelectedValue: survey123Data.attributes.camera_attached_to,
+           },
+         ],
+       },
+     },
+   )
 }

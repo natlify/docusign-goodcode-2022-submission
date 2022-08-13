@@ -7,7 +7,7 @@ const Analytics = () => {
     <Container>
       <PageLayout
         pageTitle={"Analytics Hub"}
-        pageDesc="Cillum velit pariatur sint elit laboris. Officia consectetur non i quis proident nisi do sit. Sunt dolor aute velit aute."
+        pageDesc="ArcGIS StoryMaps combined with the MediaValet Images [geotagged] can be used to understand the progression of animals over time in a given area. Scroll down to see in action"
       >
         <Stack
           my={20}
@@ -15,10 +15,11 @@ const Analytics = () => {
             width: 800,
           }}
         >
-          <SensitiveModal />
+          <p>[WIP : Not added in final submission due to lack of time] </p>
+          <p>[This Page is not for evaluation]</p>
         </Stack>
       </PageLayout>
     </Container>
-  );
+  )
 };
 export default Analytics;
