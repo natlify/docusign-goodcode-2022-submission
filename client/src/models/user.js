@@ -1,4 +1,3 @@
-import { createSelector } from "@rematch/select"
 import axios from "axios"
 import historyObject from "../routes/historyObject"
 import { supabase } from "../utils/supabase"
@@ -10,7 +9,7 @@ export const user = {
       return payload
     },
   },
-  selectors: (slice, createSelector, hasProps) => ({
+  selectors: (slice) => ({
     isAuthed() {
       return slice((user) => (user?.email ? true : false))
     },
