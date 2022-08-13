@@ -1,12 +1,13 @@
 import * as docusign from "../services/@docusign.js";
 import { checkToken } from "./docusignJWTAuth.js";
 import eSign from "docusign-esign";
+import _ from "lodash"
 
-const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO;
+const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO
 export default class eSignController {
   static createEnvelopeForSigning = async (req) => {
-    await checkToken(req);
-    const { body } = req;
+    await checkToken(req)
+    const { body } = req
 
     const envelopeArgs = {
       ...body,
@@ -80,6 +81,82 @@ export default class eSignController {
       throw new Error(error.message)
     }
 
-    return results;
-  };
+    return results
+  }
+
+  static testESign = async (req) => {
+    await checkToken(req)
+    const { body } = req
+
+    const args = {
+      accessToken: req.session.docuSignAccessToken,
+      basePath: docuSignBasePath,
+      accountId: process.env.DS_API_ACCOUNT_ID,
+      envelopeId: "e2f5eddc-b89d-4c7a-a26c-f340ca55a6cf",
+    }
+
+    try {
+      let eSignApi = new eSign.ApiClient()
+      eSignApi.setBasePath(args.basePath)
+      eSignApi.addDefaultHeader("Authorization", "Bearer " + args.accessToken)
+      let envelopesApi = new eSign.EnvelopesApi(eSignApi)
+      const results = await envelopesApi.getDocumentTabs(
+        args.accountId,
+        args.envelopeId,
+        "2",
+      )
+      const textTabObj = _.keyBy(results.textTabs, "tabLabel")
+      const numTabObj = _.keyBy(results.numberTabs, "tabLabel")
+      const dropdownTabObj = _.keyBy(results.listTabs, "tabLabel")
+
+      const updateAttemptResult = await envelopesApi.updateTabs(
+        args.accountId,
+        args.envelopeId,
+        textTabObj["z-keywords-text"].recipientId,
+        {
+          tabs: {
+            numberTabs: [
+              {
+                ...numTabObj["z-camheight-text"],
+                value: 200,
+              },
+            ],
+            textTabs: [
+              {
+                ...textTabObj["z-keywords-text"],
+                value: "Foo, Bar",
+              },
+              {
+                ...textTabObj["z-cognitive-data"],
+                value: "Foo, Bar",
+              },
+              {
+                ...textTabObj["z-alt-text"],
+                value: "Foo, Bar",
+              },
+            ],
+            listTabs: [
+              {
+                ...dropdownTabObj["z-camera-dropdown"],
+                listSelectedValue: "Browning",
+              },
+              {
+                ...dropdownTabObj["z-camattached-dropdown"],
+                listSelectedValue: "Post",
+              },
+            ],
+          },
+        },
+      )
+
+      const updatedResults = await envelopesApi.getFormData(
+        args.accountId,
+        args.envelopeId,
+      )
+      return updatedResults
+    } catch (error) {
+      console.log(error)
+      throw new Error(error)
+    }
+  }
 }
