@@ -2,9 +2,7 @@ export const theme = {
   colorScheme: "light",
   white: "#ffffff",
   black: "#17171d",
-  // fontFamily: "Cabin, sans-serif",
   headings: {
-    // fontFamily: "Cabin, sans-serif",
     fontWeight: 700,
     sizes: {
       h1: { fontSize: 48 },
@@ -29,4 +27,4 @@ export const theme = {
     ],
   },
   primaryColor: "primary",
-};
+}

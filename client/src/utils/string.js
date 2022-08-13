@@ -1,6 +1,6 @@
 import _ from "lodash";
 import * as dayjs from "dayjs";
-import * as relativeTime from "dayjs/plugin/relativeTime"; // import plugin
+import * as relativeTime from "dayjs/plugin/relativeTime" 
 
 export const fromSnaketoTitle = (str) =>
   str

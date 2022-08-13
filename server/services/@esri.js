@@ -4,22 +4,17 @@ import {
   ApplicationCredentialsManager,
 } from "@esri/arcgis-rest-request";
 
-export const ARCGIS_API_KEY =
-  "AAPK87049e50c59c4c9195f5b9db8e5e8cecyGfMdB9MxqiP-3Mjv2IElSEOY45untdicWI4dZ7XTvtDOVKf5EGz5Cq-J4-S_aSI";
 
-const apiKey = ARCGIS_API_KEY;
+const apiKey = process.env.ARCGIS_API_KEY
 
-ApiKeyManager.fromKey(apiKey);
+ApiKeyManager.fromKey(apiKey)
 
 const SessionAuth = ApplicationCredentialsManager.fromCredentials({
-  clientId: "jyqJyNUDwTmdReYd",
-  clientSecret: "0f1778872fbb465f89dce96a04c4d132",
+  clientId: process.env.ARCGIS_CLIENT_ID,
+  clientSecret: process.env.ARCGIS_CLIENT_SECRET,
   expiration: 10,
-});
+})
 
-// await SessionAuth.getToken(
-//   "https://www.arcgis.com/sharing/rest/oauth2/token",
-// );
 
 export const querySurvey123ByCamera = async (camId) => {
   const data = await queryFeatures({

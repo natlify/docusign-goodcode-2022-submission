@@ -3,6 +3,7 @@ import { checkToken } from "./docusignJWTAuth.js";
 import eSign from "docusign-esign"
 
 const docuSignBasePath = eSign.ApiClient.RestApi.BasePath.DEMO
+const backendBaseURL = process.env.BACKEND_URL
 export default class eSignController {
   static createEnvelopeForSigning = async (req) => {
     await checkToken(req)
@@ -10,8 +11,8 @@ export default class eSignController {
 
     const envelopeArgs = {
       ...body,
-      redirectUrl: "http://localhost:3000/app/successful-verification",
-      healthCheckEndPoint: "http://localhost:3000",
+      redirectUrl: `${backendBaseURL}/app/successful-verification`,
+      healthCheckEndPoint: `${backendBaseURL}/api`,
     }
 
     envelopeArgs.brandId = process.env.DS_BRAND_ID
@@ -90,11 +91,7 @@ export default class eSignController {
     await checkToken(req)
 
     try {
-      // const updatedResults = await envelopesApi.getFormData(
-      //   args.accountId,
-      //   args.envelopeId,
-      // )
-      // return updatedResults
+      /** No Empty */
     } catch (error) {
       throw new Error(error)
     }

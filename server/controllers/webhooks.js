@@ -40,27 +40,28 @@ export default class webHooksController {
           assetId,
           token: bearer_token,
           altText: metaDataAsObj["z-alt-text"],
-        });
+        })
 
         const originalKeyWords = tabs.textTabs
           .filter((ele) => ele.tabLabel === "z-keywords-text")[0]
           .originalValue.split(",")
-          .map((str) => str.trim());
+          .map((str) => str.trim())
         const newKeyWords = metaDataAsObj["z-keywords-text"]
           .split(",")
-          .map((str) => str.trim());
+          .map((str) => str.trim())
         const difference = newKeyWords.filter(
           (x) => !originalKeyWords.includes(x),
-        ); // to add
-        // const complement = originalKeyWords.filter(
-        //   (x) => !newKeyWords.includes(x),
-        // ); // to remove
+        ) // to add
+        // eslint-disable-next-line no-unused-vars
+        const complement = originalKeyWords.filter(
+          (x) => !newKeyWords.includes(x),
+        ) // to remove
 
         await addKeyWords({
           token: bearer_token,
           assetId,
           keyWordList: difference,
-        });
+        })
 
         await updateAttributes({
           assetId,
@@ -69,7 +70,7 @@ export default class webHooksController {
           long: 39.250878,
           isSensitive: false,
         })
-        return { customDataAsObj };
+        return { customDataAsObj }
       } catch (error) {
         throw new Error(error.message);
       }

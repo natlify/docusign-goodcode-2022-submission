@@ -50,10 +50,6 @@ export const ctImages = {
       })
       dispatch.ctImages.setList(combinedImageList)
     },
-    async incrementAsync(payload, rootState) {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      dispatch.count.increment(payload)
-    },
 
     async triggerDocuSignDocumentFlow(
       { imageData, reviewers = [], isSensitive = false },

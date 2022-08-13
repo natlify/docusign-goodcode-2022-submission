@@ -2,7 +2,7 @@ export const settings = {
   state: {
     mediaValetDirectoryID: "7d256341-06e2-4f2b-8d29-0d4ffc1856f5",
     approver: {
-      name: "Habit Hack",
+      name: "Habit Meeter",
       email: "hbthck@gmail.com",
     },
   },
@@ -11,10 +11,5 @@ export const settings = {
       return { ...state, [key]: value }
     },
   },
-  effects: (dispatch) => ({
-    async incrementAsync(payload, rootState) {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      dispatch.count.increment(payload)
-    },
-  }),
+  effects: (dispatch) => ({}),
 }
