@@ -1,6 +1,6 @@
 import eSignSdk from "docusign-esign";
-import { ROLE_NAMES } from "../utils/contants.js";
-import { getRenderedHtml } from "./docGeneration.js";
+import { ROLE_NAMES } from "../utils/constants.js"
+import { getRenderedHtml } from "./docGeneration.js"
 import _ from "lodash"
 const ESignBasePath = eSignSdk.ApiClient.RestApi.BasePath.DEMO
 
@@ -66,6 +66,11 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
       }),
   )
 
+  let finalApprover = new eSignSdk.TemplateRole()
+  finalApprover.email = recipients.approverEmail
+  finalApprover.name = recipients.approverFullName
+  finalApprover.roleName = ROLE_NAMES.VERIFIER
+
   envlp.customFields = {
     textCustomFields: [
       {
@@ -91,7 +96,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
     ],
   }
 
-  envlp.templateRoles = [firstVerifier, ...additionalReviewers]
+  envlp.templateRoles = [firstVerifier, ...additionalReviewers, finalApprover]
 
   envlp.status = "created"
 

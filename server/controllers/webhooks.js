@@ -10,6 +10,7 @@ export default class webHooksController {
   static handleDocusignConnectEvents = async (req) => {
     const { body } = req;
     const { data, event, bearer_token } = body;
+    console.log(JSON.stringify(data, null, 4))
     if (event === "envelope-completed") {
       await supabase
         .from("camera_trap_assets")

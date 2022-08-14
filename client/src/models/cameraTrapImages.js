@@ -56,6 +56,7 @@ export const ctImages = {
       rootState,
     ) {
       const { user } = rootState
+      const { approver } = rootState.settings
 
       /** extract Camera name from the title */
       // For NOW HardCode it as the images don't follow the naming convention
@@ -71,6 +72,8 @@ export const ctImages = {
         recipients: {
           signerEmail: user.email, // should be read from the userDetails
           signerFullName: user.fullName || "Verifier Joe",
+          approverEmail: approver.email,
+          approverName: approver.name,
           reviewers, // reviewers will be empty for normal flow (non-sensitive)
         },
         signerClientId: "3400",
