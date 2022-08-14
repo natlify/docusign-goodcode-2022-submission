@@ -67,12 +67,13 @@ export default class webHooksController {
         await updateAttributes({
           assetId,
           token: bearer_token,
-          lat: -6.823193,
-          long: 39.250878,
+          lat: customDataAsObj.latitude,
+          long: customDataAsObj.longitude,
           isSensitive: false,
         })
         return { customDataAsObj }
       } catch (error) {
+        console.log(JSON.stringify(error, null, 4))
         throw new Error(error.message);
       }
     }
