@@ -1,4 +1,5 @@
 import path from "path";
+import "dotenv/config"
 import express from "express";
 import cookieParser from "cookie-parser";
 import { eventsRouter } from "./routes/events.js";
@@ -9,8 +10,7 @@ import { docuSignAuthRouter } from "./routes/docuSignJwt.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import session from "express-session";
-import cors from "cors";
-import "dotenv/config";
+import cors from "cors"
 // import helmet from "helmet";
 import morgan from "morgan";
 import { authRouter } from "./routes/auth.js"

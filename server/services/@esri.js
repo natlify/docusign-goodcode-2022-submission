@@ -12,7 +12,7 @@ ApiKeyManager.fromKey(apiKey)
 const SessionAuth = ApplicationCredentialsManager.fromCredentials({
   clientId: process.env.ARCGIS_CLIENT_ID,
   clientSecret: process.env.ARCGIS_CLIENT_SECRET,
-  expiration: 10,
+  expiration: 1200,
 })
 
 

@@ -57,6 +57,7 @@ const ImageGallery = () => {
       try {
         await dispatch.ctImages.fetchDataFromSources()
       } catch (error) {
+        console.log(error)
         showNotification({
           title: "Something went wrong!",
           message: "Failed to fetch tasks",

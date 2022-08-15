@@ -21,7 +21,7 @@ import OnlyGuest from "./OnlyGuest"
 
 const Root = () => {
   const dispatch = useDispatch()
-  const user = useSelector((root) => root.user)
+  const user = useSelector((root) => root.user?.email)
   useEffect(() => {
     dispatch.user.initAuth()
     supabase.auth.onAuthStateChange(() => {
