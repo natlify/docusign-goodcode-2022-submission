@@ -2,6 +2,7 @@ import { supabase } from "../services/@supabase.js";
 import _ from "lodash";
 import {
   addKeyWords,
+  removeKeyWord,
   updateAltText,
   updateAttributes,
 } from "../services/@media-valet.js";
@@ -56,6 +57,17 @@ export default class webHooksController {
         const complement = originalKeyWords.filter(
           (x) => !newKeyWords.includes(x),
         ); // to remove
+
+        console.log(complement);
+
+        complement.forEach(async (wordToRemove) => {
+          await removeKeyWord({
+            token: bearer_token,
+            assetId,
+            keyWord: wordToRemove,
+          });
+        });
+
 
         const updateAttrs = await addKeyWords({
           token: bearer_token,
