@@ -60,14 +60,17 @@ export default class webHooksController {
 
         console.log(complement);
 
-        complement.forEach(async (wordToRemove) => {
-          await removeKeyWord({
-            token: bearer_token,
-            assetId,
-            keyWord: wordToRemove,
-          });
-        });
-
+        // complement.forEach(async (wordToRemove) => {
+        //   try {
+        //     await removeKeyWord({
+        //       token: bearer_token,
+        //       assetId,
+        //       keyWord: wordToRemove,
+        //     });
+        //   } catch (error) {
+        //     console.log(error);
+        //   }
+        // });
 
         const updateAttrs = await addKeyWords({
           token: bearer_token,
