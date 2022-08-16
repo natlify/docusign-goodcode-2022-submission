@@ -41,7 +41,7 @@ export const getRenderedHtml = async (data) => {
       )
       .then((output) => output);
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
     const page = await browser.newPage();
     await page.setContent(htmlString);
     const pdfData = await page.pdf();
