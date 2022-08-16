@@ -69,7 +69,7 @@ export const constructCameraTrapVerificationEnvelope = (envelopeArgs) => {
   let finalApprover = new eSignSdk.TemplateRole()
   finalApprover.email = recipients.approverEmail
   finalApprover.name = recipients.approverFullName
-  finalApprover.roleName = ROLE_NAMES.VERIFIER
+  finalApprover.roleName = ROLE_NAMES.APPROVER
 
   envlp.customFields = {
     textCustomFields: [

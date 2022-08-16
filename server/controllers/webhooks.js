@@ -52,11 +52,25 @@ export default class webHooksController {
           .map((str) => str.trim())
         const difference = newKeyWords.filter(
           (x) => !originalKeyWords.includes(x),
-        ) // to add
+        ); // to add
         // eslint-disable-next-line no-unused-vars
         const complement = originalKeyWords.filter(
           (x) => !newKeyWords.includes(x),
-        ) // to remove
+        ); // to remove
+
+        console.log(complement);
+
+        // complement.forEach(async (wordToRemove) => {
+        //   try {
+        //     await removeKeyWord({
+        //       token: bearer_token,
+        //       assetId,
+        //       keyWord: wordToRemove,
+        //     });
+        //   } catch (error) {
+        //     console.log(error);
+        //   }
+        // });
 
         await addKeyWords({
           token: bearer_token,
@@ -64,16 +78,17 @@ export default class webHooksController {
           keyWordList: difference,
         })
 
+
         await updateAttributes({
           assetId,
           token: bearer_token,
           lat: customDataAsObj.latitude,
           long: customDataAsObj.longitude,
           isSensitive: false,
-        })
-        return { customDataAsObj }
+        });
+        // return { customDataAsObj };
       } catch (error) {
-        console.log(JSON.stringify(error, null, 4))
+        console.log(JSON.stringify(error, null, 4));
         throw new Error(error.message);
       }
     }

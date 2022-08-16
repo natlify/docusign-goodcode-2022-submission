@@ -1,25 +1,21 @@
 import imageToBase64 from "image-to-base64";
 import ejs from "ejs";
-import util from "util";
-import fs from "fs";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-import fileSize from "filesize"
-import dayjs from "dayjs"
-import pdf from "html-pdf"
-
-const writeFile = util.promisify(fs.writeFile)
+import fileSize from "filesize";
+import dayjs from "dayjs";
+import puppeteer from "puppeteer";
 
 export const convertToBase64 = async (url) => {
-  const response = await imageToBase64(url)
-  return response
-}
+  const response = await imageToBase64(url);
+  return response;
+};
 
 export const getRenderedHtml = async (data) => {
   try {
-    const { mediaValetData, survey123Data } = data
+    const { mediaValetData, survey123Data } = data;
     const htmlString = await ejs
       .renderFile(
         path.resolve(__dirname, "../docTemplates/Sentinels-CTIMDV.ejs"),
@@ -43,30 +39,16 @@ export const getRenderedHtml = async (data) => {
         },
         {},
       )
-      .then((output) => output)
-    await writeFile("index.html", htmlString, "utf8")
-    var options = {
-      width: "26.0cm",
-      height: "32.7cm",
-      border: "0",
-    }
+      .then((output) => output);
 
-    const pdfData = await createPDF(htmlString, options)
+    const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
+    const page = await browser.newPage();
+    await page.setContent(htmlString);
+    const pdfData = await page.pdf();
+    await browser.close();
 
-    return pdfData
+    return pdfData;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-
-const createPDF = (html, options) =>
-  new Promise((resolve, reject) => {
-    pdf.create(html, options).toBuffer((err, buffer) => {
-      if (err !== null) {
-        reject(err)
-      } else {
-        resolve(buffer)
-      }
-      return buffer
-    })
-  })
+};

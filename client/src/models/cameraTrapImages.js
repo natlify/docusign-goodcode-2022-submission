@@ -71,7 +71,7 @@ export const ctImages = {
       const redirectResult = await Api.post(`/camera-trap/triggerFlow`, {
         recipients: {
           signerEmail: user.email, // should be read from the userDetails
-          signerFullName: user.fullName || "Verifier Joe",
+          signerFullName: user.full_name || "Verifier Doe",
           approverEmail: approver.email,
           approverName: approver.name,
           reviewers, // reviewers will be empty for normal flow (non-sensitive)

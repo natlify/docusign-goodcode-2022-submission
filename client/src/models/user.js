@@ -38,10 +38,10 @@ export const user = {
     },
 
     async setServerCookie(payload, rootState) {
-      axios.post("/api/auth/set-supabase-cookie", {
+      await axios.post("/api/auth/set-supabase-cookie", {
         event: rootState.user?.email ? "SIGNED_IN" : "SIGNED_OUT",
         session: supabase.auth.session(),
-      })
+      });
     },
 
     async updateFullName(payload, rootState) {

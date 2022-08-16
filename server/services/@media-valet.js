@@ -20,23 +20,23 @@ const restApiInstance = axios.create({
   method: "GET",
   headers: {
     "Content-Type": "application/json",
-    "Ocp-Apim-Subscription-Key": process.env.SUBSCRIPTION_KEY,
+    "Ocp-Apim-Subscription-Key": process.env.MV_SUBSCRIPTION_KEY,
   },
 })
 
 export const generateAccessToken = async () => {
   const tokenParams = {
-    username: "creedcode2022@gmail.com",
-    password: "CreedCode123#",
+    username: process.env.MV_USERNAME,
+    password: process.env.MV_PASSWORD,
     scope: "api offline_access",
-  };
+  }
 
   try {
-    const response = await mediaValetOauthClient.getToken(tokenParams);
-    const raw_data_dump = JSON.stringify(response);
+    const response = await mediaValetOauthClient.getToken(tokenParams)
+    const raw_data_dump = JSON.stringify(response)
     const {
       token: { access_token },
-    } = response;
+    } = response
     await supabase.from("oauth_security").upsert([
       {
         username: "zapene_service_role",
@@ -44,13 +44,13 @@ export const generateAccessToken = async () => {
         raw_data_dump,
         access_token,
       },
-    ]);
-    console.log("Refreshing Access Token");
-    return access_token;
+    ])
+    console.log("Refreshing Access Token")
+    return access_token
   } catch (error) {
-    throw new Error("Access Token Error", error.message);
+    throw new Error("Access Token Error", error.message)
   }
-};
+}
 
 export const fetchCategory = ({ token, folderID }) =>
   restApiInstance({

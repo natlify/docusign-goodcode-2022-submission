@@ -55,14 +55,14 @@ const ImageGallery = () => {
   useEffect(() => {
     const getTasks = async () => {
       try {
-        await dispatch.ctImages.fetchDataFromSources()
+        await dispatch.ctImages.fetchDataFromSources();
       } catch (error) {
         showNotification({
           title: "Something went wrong!",
           message: "Failed to fetch tasks",
           icon: <IconBug size={15} />,
           color: "red",
-        })
+        });
       }
     }
     getTasks()
