@@ -29,7 +29,8 @@ const Root = () => {
     })
   }, [])
   useEffect(() => {
-    dispatch.user.setServerCookie()
+    const setUp = async () => await dispatch.user.setServerCookie();
+    setUp();
     if (user?.email && user.accepted_cp === false) {
       // eslint-disable-next-line no-undef
       docuSignClick.Clickwrap.render(

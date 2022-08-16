@@ -71,13 +71,12 @@ export default class webHooksController {
         //   }
         // });
 
-        const updateAttrs = await addKeyWords({
+        await addKeyWords({
           token: bearer_token,
           assetId,
           keyWordList: difference,
         });
 
-        console.log(updateAttrs?.data);
 
         await updateAttributes({
           assetId,
