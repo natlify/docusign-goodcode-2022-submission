@@ -4,20 +4,18 @@ import esign from "docusign-esign";
 import { readFileSync } from "fs";
 import dayjs from "dayjs";
 const { ApiClient } = esign;
-const oAuth = ApiClient.OAuth;
-// const restApi = ApiClient.RestApi;
+const oAuth = ApiClient.OAuth
 
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath(import.meta.url)
 
-const __dirname = path.dirname(__filename);
+const __dirname = path.dirname(__filename)
 
 // Constants
-const rsaKey = readFileSync(path.resolve(__dirname, "../private.key"));
-const jwtLifeSec = 60 * 60; // Request lifetime of JWT token is 60 minutes
-const scopes = "signature";
+const rsaKey = readFileSync(path.resolve(__dirname, "../private.key"))
+const jwtLifeSec = 60 * 60 // Request lifetime of JWT token is 60 minutes
+const scopes = "signature"
 
-// const basePath = restApi.BasePath.DEMO;
-const oAuthBasePath = oAuth.BasePath.DEMO;
+const oAuthBasePath = oAuth.BasePath.DEMO
 
 /**
  * Creates and sends a JWT token using the integration key, user ID, scopes and RSA key.
@@ -25,11 +23,11 @@ const oAuthBasePath = oAuth.BasePath.DEMO;
  */
 const getToken = async (req) => {
   // Get API client and set the base paths
-  const eSignApi = new ApiClient();
-  eSignApi.setOAuthBasePath(oAuthBasePath);
+  const eSignApi = new ApiClient()
+  eSignApi.setOAuthBasePath(oAuthBasePath)
 
   // Request a JWT token
-  let results;
+  let results
 
   results = await eSignApi.requestJWTUserToken(
     process.env.INTEGRATION_KEY,
@@ -37,13 +35,13 @@ const getToken = async (req) => {
     scopes,
     rsaKey,
     jwtLifeSec,
-  );
+  )
 
   // Save the access token and the expiration timestamp
-  const expiresAt = dayjs().add(results.body.expires_in, "s"); // TODO: subtract tokenReplaceMin?
-  req.session.docuSignAccessToken = results.body.access_token;
-  req.session.tokenExpirationTimestamp = expiresAt;
-};
+  const expiresAt = dayjs().add(results.body.expires_in, "s")
+  req.session.docuSignAccessToken = results.body.access_token
+  req.session.tokenExpirationTimestamp = expiresAt
+}
 
 /**
  * Checks to see that the current access token is still valid, and if not,
@@ -67,8 +65,7 @@ export const checkToken = async (req) => {
 
     // Update the token if needed
     if (needToken) {
-      console.log("refreshing");
-      await getToken(req);
+      await getToken(req)
     }
   } catch (error) {
     if (
@@ -123,14 +120,16 @@ const getUserInfo = async (req) => {
  */
 export const login = async (req, res, next) => {
   try {
-    // As long as the user has attempted to login before, they have either successfully
-    // logged in or was redirected to the consent URL and then redirected back to the
-    // app. Only set the user to logged out if an unknown error occurred during the
-    // login process.
-    req.session.isDocuSignLoggedIn = true;
-    await checkToken(req);
-    await getUserInfo(req);
-    res.status(200).send("Successfully logged in.");
+    /**
+     * As long as the user has attempted to login before, they have either successfully
+     * logged in or was redirected to the consent URL and then redirected back to the
+     * app. Only set the user to logged out if an unknown error occurred during the
+     * login process.
+     */
+    req.session.isDocuSignLoggedIn = true
+    await checkToken(req)
+    await getUserInfo(req)
+    res.status(200).send("Successfully logged in.")
   } catch (error) {
     // User has not provided consent yet, send the redirect URL to user.
     if (error.message === "Consent required") {
@@ -152,8 +151,7 @@ export const login = async (req, res, next) => {
  * Logs the user out by destroying the session.
  */
 export const logout = (req, res) => {
-  req.session = null;
-  console.log("Successfully logged out!");
+  req.session = null
   res.status(200).send("Success: you have logged out");
 };
 

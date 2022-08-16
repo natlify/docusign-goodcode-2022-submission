@@ -1,9 +1,20 @@
 import { Container, Paper, Title } from "@mantine/core";
 import { Auth } from "@supabase/ui";
-import { PageLayout } from "../layouts/PageLayout";
-import { supabase } from "../utils/supabase";
+import { useEffect } from "react"
+import { useSelector, useStore } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { PageLayout } from "../layouts/PageLayout"
+import { supabase } from "../utils/supabase"
 
 const AppAuth = () => {
+  const store = useStore()
+  const isLoggedIn = useSelector(store.select.user.isAuthed)
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/app")
+    }
+  }, [isLoggedIn])
   return (
     <Container>
       <PageLayout>
@@ -23,6 +34,6 @@ const AppAuth = () => {
         </Container>
       </PageLayout>
     </Container>
-  );
-};
+  )
+}
 export default AppAuth;

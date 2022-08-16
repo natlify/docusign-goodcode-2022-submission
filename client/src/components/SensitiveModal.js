@@ -53,19 +53,18 @@ const SensitiveModal = ({ onConfirmHandler }) => {
           </Title>
           <Stack spacing={"lg"}>
             <Autocomplete
-              // label="Select Reviewers"
               placeholder="Start Selecting"
               data={autoSuggestList}
               onItemSubmit={(item) => {
                 const selectedContact = contacts.filter(
                   (person) => person.email === item.id,
-                )[0];
-                const { name, email } = selectedContact;
+                )[0]
+                const { name, email } = selectedContact
                 reviewersHandlers.prepend({
                   name,
                   email,
                   initials: getInitials(name),
-                });
+                })
               }}
               value=""
             />
@@ -104,6 +103,6 @@ const SensitiveModal = ({ onConfirmHandler }) => {
         </Button>
       </Group>
     </Stack>
-  );
+  )
 };
 export default SensitiveModal;

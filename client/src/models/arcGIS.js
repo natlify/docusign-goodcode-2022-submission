@@ -16,11 +16,8 @@ export const arcGIS = {
   },
   selectors: (slice) => ({
     isAuthenticated() {
-      return slice((state) => state.username !== null);
+      return slice((state) => state.username !== null)
     },
-    // userId() {
-    //   return slice((state) => state.user.id);
-    // },
   }),
   effects: (dispatch) => ({
     triggerAuthFlow() {
@@ -33,15 +30,15 @@ export const arcGIS = {
           ),
         "oauth-window",
         "height=400,width=600,menubar=no,location=yes,resizable=yes,scrollbars=yes,status=yes",
-      );
+      )
     },
     handleUserAuth(hashReturned) {
-      const hashValuesAsString = hashReturned.substring(1);
-      const authPayload = getUrlHashVars(hashValuesAsString);
-      dispatch.arcGIS.setValue(authPayload);
+      const hashValuesAsString = hashReturned.substring(1)
+      const authPayload = getUrlHashVars(hashValuesAsString)
+      dispatch.arcGIS.setValue(authPayload)
     },
     disconnectAccount() {
-      dispatch.arcGIS.reset();
+      dispatch.arcGIS.reset()
     },
   }),
-};
+}

@@ -1,10 +1,15 @@
 import { MantineProvider } from "@mantine/core";
 import { ModalsProvider } from "@mantine/modals";
 import { NotificationsProvider } from "@mantine/notifications";
-import { BrowserRouter } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
-import { Provider } from "react-redux";
-import store from "./config/store";
+import {
+  BrowserRouter,
+  unstable_HistoryRouter as HistoryRouter,
+} from "react-router-dom"
+import { HelmetProvider } from "react-helmet-async"
+import { Provider } from "react-redux"
+import store from "./config/store"
+import historyObject from "./routes/historyObject"
+
 
 import "./styles/main.css";
 import { modalProps } from "./utils/modalProps";
@@ -17,16 +22,18 @@ const App = () => {
       <MantineProvider withGlobalStyles withNormalizeCS theme={theme}>
         <NotificationsProvider position="bottom-right" limit={4}>
           <ModalsProvider modals={{}} modalProps={modalProps}>
-            <BrowserRouter>
-              <HelmetProvider>
+            {/* <BrowserRouter> */}
+            <HelmetProvider>
+              <HistoryRouter history={historyObject}>
                 <Root />
-              </HelmetProvider>
-            </BrowserRouter>
+              </HistoryRouter>
+            </HelmetProvider>
+            {/* </BrowserRouter> */}
           </ModalsProvider>
         </NotificationsProvider>
       </MantineProvider>
     </Provider>
-  );
+  )
 };
 
 export default App;

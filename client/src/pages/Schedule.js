@@ -6,11 +6,12 @@ const Schedule = () => {
     <Container>
       <PageLayout
         pageTitle={"Scheduler Page"}
-        pageDesc="Cillum velit pariatur sint elit laboris. Officia consectetur non i quis proident nisi do sit. Sunt dolor aute velit aute."
+        pageDesc="Set up automated notifications and reminder to refetch camera trap images after specified interval. This can be used to validate data again"
       >
-        <Stack my={20}>My custom Content</Stack>
+        <p>[WIP : Not added in final submission due to lack of time] </p>
+        <p>[This Page is not for evaluation]</p>
       </PageLayout>
     </Container>
-  );
+  )
 };
 export default Schedule;

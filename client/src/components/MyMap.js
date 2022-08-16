@@ -13,7 +13,7 @@ const MyMap = () => {
       zoom: 4,
     });
   }, []);
-  return <div ref={mapRef} style={{ height: "100vh", width: "100vw" }}></div>;
+  return <div ref={mapRef}></div>
 };
 
 export default MyMap;
