@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.js",
+    "heroku-prebuild": "sh buildpack-run.sh",
     "build": "cd client && npm install --force && npm run build",
     "prepare": "husky install",
     "dev": "nodemon server/index.js"

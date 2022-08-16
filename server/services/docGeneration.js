@@ -46,7 +46,7 @@ export const getRenderedHtml = async (data) => {
       width: "26.0cm",
       height: "32.7cm",
       border: "0",
-      phantomPath: "./node_modules/phantomjs-prebuilt/bin/phantomjs",
+      phantomPath: "temp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs",
     };
 
     const pdfData = await createPDF(htmlString, options);
