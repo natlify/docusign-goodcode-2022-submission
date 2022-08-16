@@ -6,7 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node server/index.js",
-    "heroku-prebuild": "sh buildpack-run.sh",
     "build": "cd client && npm install --force && npm run build",
     "prepare": "husky install",
     "dev": "nodemon server/index.js"
@@ -46,6 +45,7 @@
     "morgan": "^1.10.0",
     "open": "^8.4.0",
     "pg": "^8.7.3",
+    "puppeteer": "^16.1.0",
     "simple-oauth2": "^4.3.0",
     "wkhtmltopdf": "^0.4.0"
   },

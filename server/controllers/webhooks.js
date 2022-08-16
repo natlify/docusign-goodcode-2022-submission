@@ -2,7 +2,6 @@ import { supabase } from "../services/@supabase.js";
 import _ from "lodash";
 import {
   addKeyWords,
-  removeKeyWord,
   updateAltText,
   updateAttributes,
 } from "../services/@media-valet.js";

@@ -6,13 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import fileSize from "filesize";
 import dayjs from "dayjs";
-import pdf from "html-pdf";
-
+import puppeteer from "puppeteer";
 
 export const convertToBase64 = async (url) => {
-  const response = await imageToBase64(url)
-  return response
-}
+  const response = await imageToBase64(url);
+  return response;
+};
 
 export const getRenderedHtml = async (data) => {
   try {
@@ -41,30 +40,15 @@ export const getRenderedHtml = async (data) => {
         {},
       )
       .then((output) => output);
-    // await writeFile("index.html", htmlString, "utf8")
-    var options = {
-      width: "26.0cm",
-      height: "32.7cm",
-      border: "0",
-      phantomPath: "temp/phantomjs-2.1.1-linux-x86_64/bin/phantomjs",
-    };
 
-    const pdfData = await createPDF(htmlString, options);
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.setContent(htmlString);
+    const pdfData = await page.pdf();
+    await browser.close();
 
     return pdfData;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-
-const createPDF = (html, options) =>
-  new Promise((resolve, reject) => {
-    pdf.create(html, options).toBuffer((err, buffer) => {
-      if (err !== null) {
-        reject(err)
-      } else {
-        resolve(buffer)
-      }
-      return buffer
-    })
-  })
+};
